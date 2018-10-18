@@ -38,6 +38,9 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CE2E22580BF048A580988327 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1429CA248B0B4978AF2052F4 /* libLRDRCTSimpleToast.a */; };
+		E0866D123ADC40D08685B511 /* BalooPaaji-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7ABBB0ECDB14602AD1ED1C6 /* BalooPaaji-Regular.ttf */; };
+		984AA4DFE4E145B8B068634A /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B91968CECC4CD095616F80 /* Comfortaa-Regular.ttf */; };
+		5B77779EA2FE48E980620A85 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB428B65F6814BFD85ED3FE2 /* RobotoCondensed-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +348,9 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		032CEEDE8AB943AD97032AA9 /* LRDRCTSimpleToast.xcodeproj */ = {isa = PBXFileReference; name = "LRDRCTSimpleToast.xcodeproj"; path = "../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		1429CA248B0B4978AF2052F4 /* libLRDRCTSimpleToast.a */ = {isa = PBXFileReference; name = "libLRDRCTSimpleToast.a"; path = "libLRDRCTSimpleToast.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C7ABBB0ECDB14602AD1ED1C6 /* BalooPaaji-Regular.ttf */ = {isa = PBXFileReference; name = "BalooPaaji-Regular.ttf"; path = "../assets/fonts/BalooPaaji-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09B91968CECC4CD095616F80 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; name = "Comfortaa-Regular.ttf"; path = "../assets/fonts/Comfortaa-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB428B65F6814BFD85ED3FE2 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; name = "RobotoCondensed-Regular.ttf"; path = "../assets/fonts/RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +588,7 @@
 				00E356EF1AD99517003FC87E /* histaffTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				FCFAE490C8274688A30E8182 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -607,6 +614,17 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		FCFAE490C8274688A30E8182 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				C7ABBB0ECDB14602AD1ED1C6 /* BalooPaaji-Regular.ttf */,
+				09B91968CECC4CD095616F80 /* Comfortaa-Regular.ttf */,
+				CB428B65F6814BFD85ED3FE2 /* RobotoCondensed-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1054,6 +1072,9 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				E0866D123ADC40D08685B511 /* BalooPaaji-Regular.ttf in Resources */,
+				984AA4DFE4E145B8B068634A /* Comfortaa-Regular.ttf in Resources */,
+				5B77779EA2FE48E980620A85 /* RobotoCondensed-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
