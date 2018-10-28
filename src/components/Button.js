@@ -11,7 +11,7 @@ const Button = ({
   width =  screen.width - 40,
   onPress, 
   title, 
-  height = 45,
+  height = 40,
   marginTop = 40,
   backgroundColor = '#2672cb',
   fontWeight, 
