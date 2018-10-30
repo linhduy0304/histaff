@@ -1,18 +1,20 @@
 
 import {
-  LOGIN_REQUEST,
-  LOGIN_SUCC,
-  LOGIN_FAIL,
+  LOGIN_LOADING,
 } from '../config/types';
 
 const initialState = {
-  auth: null,
+  loading: null,
 }
 
 export default function auth (state = initialState, action) {
-  switch(action.type) {
-    
-    default: 
-      return state
-  }
+    switch(action.type) {
+        case LOGIN_LOADING:
+            return {
+                ...state,
+                loading: action.data
+            }
+        default: 
+            return state
+    }
 }
