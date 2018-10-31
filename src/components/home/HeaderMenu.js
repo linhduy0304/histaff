@@ -10,14 +10,14 @@ import {
 } from 'react-native';
 
 const HeaderMenu = ({
-  data = '',
+  data,
   logout
 }) => (
   <View style={css.container}>
     <Image style={css.avatar} source={data.avatar ? {uri: data.avatar+'.png'} : require('../../icons/avatar_default.jpg')} />  
     <View style={css.ctInfo}>
-      <Text style={css.name}>{data.full_name}</Text> 
-      <Text style={css.email}>{data.email}</Text>
+      <Text style={css.name}>{data.FULLNAME}</Text> 
+      <Text style={css.email}>{data.EMAIL}</Text>
       <Text onPress={logout} style={css.logout}>Đăng xuất</Text>
     </View>
   </View>

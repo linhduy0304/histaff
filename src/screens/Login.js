@@ -17,13 +17,16 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: 'admin.portal@tinhvan.com',
+            password: 'admin1234',
         };
     }
 
     login = () => {
         const { username, password } = this.state;
+        if(!username || !password) {
+            return
+        }
         var body = {
             UserName: username,
             Password: password,
@@ -35,6 +38,11 @@ class Login extends Component {
         const {username, password} = this.state;
         return (
             <View style={Css.container}>
+                {
+                    this.props.auth.loading ? 
+                        <LoadingFull />
+                    : null
+                }
                 <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container}>
                     <View style={{alignItems: 'center'}}>
@@ -78,6 +86,7 @@ const styles = StyleSheet.create({
 
 import { connect } from 'react-redux';
 import { login } from '../actions/auth';
+import LoadingFull from '../components/LoadingFull';
 
 const mapStateToProps = (state) => {
     return {

@@ -2,25 +2,32 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Store from '../services/Store';
+import Const from '../services/Const';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+
+    componentWillMount = () => {
+        new Store().getSession(Const.IS_LOGIN).then(isLogin => {
+            if(isLogin) {
+                Actions.home({type: 'reset'})
+            }else {
+                Actions.login({type: 'reset'})
+            }
+        })
     };
-  }
 
-  componentWillMount = () => {
-    Actions.login()
-  };
-
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    );
-  }
+    render() {
+        return (
+        <View>
+        </View>
+        );
+    }
 }
 
 export default App;

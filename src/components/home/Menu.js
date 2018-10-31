@@ -208,7 +208,7 @@ class Menu extends Component {
     return (
       <ScrollView style={{backgroundColor: '#303030'}}>
         <View style={{marginTop}}>
-          <HeaderMenu logout={() => this.logout()} data={this.props.auth.currentUser}/>
+          <HeaderMenu logout={() => this.logout()} data={''}/>
           {
             menu.map((item, index) => {
               return this.renderMenu(item, index)
@@ -248,7 +248,7 @@ import {login} from '../../actions/auth';
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    profile: state.profile
   }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -43,7 +43,7 @@ const Main = () => (
 		<Stack key="root" hideNavBar={true}>
 			<Scene key="app" component={App}/>
 			<Scene key="login" component={Login}/>
-			<Scene key="home" initial={true} component={Home}/>
+			<Scene key="home" component={Home}/>
 
 			<Scene key="hsns" component={HSNS}/>
 			<Scene key="qhnt" component={QHNT}/>

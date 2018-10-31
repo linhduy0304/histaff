@@ -1,8 +1,20 @@
 
-import { LOGIN_LOADING } from "../config/types";
+import {
+    LOGIN_LOADING,
+    USER_DATA
+} from "../config/types";
 
 const Auth = require('../services/Auth');
+import Const from '../services/Const';
+import Store from '../services/Store';
+import { Actions } from 'react-native-router-flux';
 
+export const getDataUser = data => {
+    return {
+        type: USER_DATA,
+        data
+    }
+} 
 export const loading = (loading) => {
     return {
         type: LOGIN_LOADING,
@@ -14,19 +26,14 @@ export const login = (body) => {
         dispatch(loading(true))
         return Auth.login(body).then(res => {
             console.log(res)
-            switch(res.meta.code) {
-                case 1:
-                new Store().storeSession(Const.ARR_ID_NOTI, []);
-                new Store().storeSession(Const.TOKEN, res.data.token);
+            if(res) {
+                dispatch(getDataUser(res))
                 new Store().storeSession(Const.IS_LOGIN, true);
-                Actions.tab({type: 'reset'})
-                dispatch(profileUserSuccess(res.data.info));
+                Actions.home({type: 'reset'})
                 dispatch(loading(null));
-                return;
-                default:
-                SimpleToast.show(res.meta.message)
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
                 dispatch(loading(null));
-                return;
             }
         })
         .catch((error) => {

@@ -171,4 +171,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (HSNS)
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.auth
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (body) => dispatch(login(body)),
+    }
+}
+
+export default connect(mapStateToProps)(HSNS);

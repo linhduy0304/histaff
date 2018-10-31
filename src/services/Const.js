@@ -16,11 +16,5 @@ var keyMirror = function(obj) {
   };
   
   module.exports = keyMirror({
-    HS_IS_LOGIN: null,
-    HS_HEADER: null,
-  
-    SET_SESSION_TOKEN: null,
-    SET_STORE: null,
-    SET_STATE: null,
-    GET_STATE: null,
+    IS_LOGIN: null,
   });
