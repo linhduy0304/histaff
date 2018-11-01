@@ -21,131 +21,140 @@ import css from '../../config/css';
 import { Actions } from 'react-native-router-flux';
 import TextShow from '../../components/TextShow';
 import Nav from '../../components/Nav';
+import LoadingFull from '../../components/LoadingFull';
 
 const window = Dimensions.get('window');
 
 class HSNS extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      full_name: 'Lê Linh Duy',
-      email: 'linhduy.0304.utc@gmail.com',
-      username: 'linhduy0304',
-      cmt: '168480683',
-      address: 'Kim Bảng Hà Nam',
-      telephone: '0973425393',
-      sex: 1,
-      birthday: '25-03-1993',
-      job: 'IT',
-      avatar: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: '',
+        }
     }
-  }
 
+    componentWillMount = () => {
+        this.props.getProfile(this.props.profile.user.EMPLOYEE_CODE)
+    };
 
-  render() {
-    return (
-      <View style={css.container}>
-        <Nav
-            label='Hồ sơ nhân sự'
-        />
+    componentWillReceiveProps = (nextProps) => {
+        if(nextProps.profile.profile && nextProps.profile.profile !== this.props.profile.profile) {
+            this.setState({
+                data: nextProps.profile.profile
+            })
+        }
+    };
+    
+    render() {
+        const { data } = this.state;
+        return (
+        <View style={css.container}>
+            {
+                this.props.profile.loading ?
+                    <LoadingFull/>
+                : null
+            }
+            <Nav
+                label='Hồ sơ nhân sự'
+            />
 
-        <ScrollView
-          bounces={false}
-          keyboardShouldPersistTaps={'always'}
-        >
-          <View style={styles.body}>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{alignItems: 'center'}}>
-                <View style={styles.ctAvatar}>
-                  <Image style={styles.avatar} source={this.state.pickImage ? {uri: this.state.avatar} :this.state.avatar ? {uri: this.state.avatar + '_100x100.png'} : require('../../icons/avatar_default.jpg')} />
+            <ScrollView
+            bounces={false}
+            keyboardShouldPersistTaps={'always'}
+            >
+            <View style={styles.body}>
+                <View style={{flexDirection: 'row'}}>
+                <View style={{alignItems: 'center'}}>
+                    <View style={styles.ctAvatar}>
+                    <Image style={styles.avatar} source={this.state.pickImage ? {uri: this.state.avatar} :this.state.avatar ? {uri: this.state.avatar + '_100x100.png'} : require('../../icons/avatar_default.jpg')} />
+                    </View>
                 </View>
-              </View>
-              
-              <View style={{flex: 1, marginLeft: 15}}>
-                <TextShow
-                  label='Tên hiển thị'
-                  value={this.state.full_name}
-                />
-                <View style={{flexDirection: 'row', marginTop: 5}}>
-                  <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
-                  <View style={{marginLeft: 20, flexDirection: 'row'}}>
-                    <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
-                      <View style={styles.ctTick}>
+                
+                <View style={{flex: 1, marginLeft: 15}}>
+                    <TextShow
+                    label='Tên hiển thị'
+                    value={this.state.full_name}
+                    />
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
+                    <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
+                    <View style={{marginLeft: 20, flexDirection: 'row'}}>
+                        <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
+                        <View style={styles.ctTick}>
+                            {
+                            this.state.sex == 1 ?
+                                <Image source={require('../../icons/ic_check_green.png')}/>
+                                : null
+                            }
+                        </View>
+                        <Text style={{color: 'rgb(31, 42, 53)'}}>Nam</Text>
+                        </View>
+                        <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
+                        <View style={styles.ctTick}>
                         {
-                          this.state.sex == 1 ?
+                            this.state.sex == 0 ?
                             <Image source={require('../../icons/ic_check_green.png')}/>
                             : null
                         }
-                      </View>
-                      <Text style={{color: 'rgb(31, 42, 53)'}}>Nam</Text>
+                        </View>
+                        <Text style={{color: 'rgb(31, 42, 53)'}}>Nữ</Text>
+                        </View>
                     </View>
-                    <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
-                      <View style={styles.ctTick}>
-                      {
-                        this.state.sex == 0 ?
-                          <Image source={require('../../icons/ic_check_green.png')}/>
-                          : null
-                      }
-                      </View>
-                      <Text style={{color: 'rgb(31, 42, 53)'}}>Nữ</Text>
                     </View>
-                  </View>
+                    
+                </View>
+                </View>
+                <TextShow
+                label='Email'
+                value={this.state.email}
+                />
+                <TextShow
+                label='Chức danh'
+                value={this.state.job}
+                />
+                <View style={{flexDirection: 'row'}}>
+                <TextShow
+                    label='Số điện thoại'
+                    value={this.state.telephone}
+                />
+                <TextShow
+                    label='Ngày sinh'
+                    value={'25-03-1993'}
+                />
+                </View>
+                <View style={{flexDirection: 'row', }}>
+                <TextShow
+                    label='Số CMTND'
+                    value={this.state.cmt}
+                />
+                <TextShow
+                    label='Ngày cấp'
+                    value={'14-03-2015'}
+                />
+                <TextShow
+                    label='Nơi cấp'
+                    value={'CA Hà Nam'}
+                />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                <TextShow
+                    label='Quốc tịch'
+                    value={'Việt Nam'}
+                />
+                <TextShow
+                    label='Dân tộc'
+                    value={'Kinh'}
+                />
+                <TextShow
+                    label='Địa chỉ'
+                    value={this.state.address}
+                />
                 </View>
                 
-              </View>
             </View>
-            <TextShow
-              label='Email'
-              value={this.state.email}
-            />
-            <TextShow
-              label='Chức danh'
-              value={this.state.job}
-            />
-            <View style={{flexDirection: 'row'}}>
-              <TextShow
-                label='Số điện thoại'
-                value={this.state.telephone}
-              />
-               <TextShow
-                label='Ngày sinh'
-                value={'25-03-1993'}
-              />
-            </View>
-            <View style={{flexDirection: 'row', }}>
-              <TextShow
-                label='Số CMTND'
-                value={this.state.cmt}
-              />
-              <TextShow
-                label='Ngày cấp'
-                value={'14-03-2015'}
-              />
-              <TextShow
-                label='Nơi cấp'
-                value={'CA Hà Nam'}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <TextShow
-                label='Quốc tịch'
-                value={'Việt Nam'}
-              />
-              <TextShow
-                label='Dân tộc'
-                value={'Kinh'}
-              />
-              <TextShow
-                label='Địa chỉ'
-                value={this.state.address}
-              />
-            </View>
-            
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
+            </ScrollView>
+        </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -172,16 +181,16 @@ const styles = StyleSheet.create({
 });
 
 import { connect } from 'react-redux';
-
+import { getProfile } from '../../actions/profile';
 const mapStateToProps = (state) => {
     return {
-        profile: state.auth
+        profile: state.profile
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (body) => dispatch(login(body)),
+        getProfile: (id) => dispatch(getProfile(id)),
     }
 }
 
-export default connect(mapStateToProps)(HSNS);
+export default connect(mapStateToProps, mapDispatchToProps)(HSNS);

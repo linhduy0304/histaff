@@ -1,36 +1,33 @@
 
 import {
-    LOGIN_LOADING,
-    USER_DATA
+    PROFILE_LOADING,
+    PROFILE_SUCCESS
 } from "../config/types";
 
-const Auth = require('../services/Auth');
+const Profile = require('../services/Profile');
 import Const from '../services/Const';
 import Store from '../services/Store';
 import { Actions } from 'react-native-router-flux';
 
-export const getDataUser = data => {
+export const loading = (data) => {
     return {
-        type: USER_DATA,
+        type: PROFILE_LOADING,
         data
     }
-} 
-export const loading = (loading) => {
+}
+
+export const profileSuccess = data => {
     return {
-        type: LOGIN_LOADING,
-        loading
+        type: PROFILE_SUCCESS,
+        data
     }
 }
-export const login = (body) => {
+export const getProfile = (id) => {
     return dispatch => {
         dispatch(loading(true))
-        return Auth.login(body).then(res => {
-            console.log(res)
+        return Profile.getProfile(id).then(res => {
             if(res) {
-                dispatch(getDataUser(res))
-                new Store().storeSession(Const.IS_LOGIN, true);
-                new Store().storeSession(Const.USER, res);
-                Actions.home({type: 'reset'})
+                dispatch(profileSuccess(res));
                 dispatch(loading(null));
             }else {
                 SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
@@ -41,4 +38,4 @@ export const login = (body) => {
           dispatch(loading(null))
         });
     };
-  }
+}

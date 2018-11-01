@@ -17,4 +17,5 @@ var keyMirror = function(obj) {
   
   module.exports = keyMirror({
     IS_LOGIN: null,
+    USER: null
   });

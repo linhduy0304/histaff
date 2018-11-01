@@ -13,8 +13,9 @@ class App extends Component {
     }
 
     componentWillMount = () => {
-        new Store().getSession(Const.IS_LOGIN).then(isLogin => {
-            if(isLogin) {
+        new Store().getSession(Const.USER).then(user => {
+            if(user) {
+                this.props.getDataUser(user)
                 Actions.home({type: 'reset'})
             }else {
                 Actions.login({type: 'reset'})
@@ -30,4 +31,19 @@ class App extends Component {
     }
 }
 
-export default App;
+import { connect } from 'react-redux';
+import { getDataUser } from '../actions/auth';
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getDataUser: (body) => dispatch(getDataUser(body)),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

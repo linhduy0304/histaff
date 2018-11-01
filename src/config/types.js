@@ -1,3 +1,7 @@
 
+
+export const PROFILE_SUCCESS = 'PROFILE_SUCCESS';
+export const PROFILE_LOADING = 'PROFILE_LOADING';
+
 export const LOGIN_LOADING = 'LOGIN_LOADING';
 export const USER_DATA = 'USER_DATA';

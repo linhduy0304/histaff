@@ -188,8 +188,7 @@ class Menu extends Component {
   }
 
   delete() {
-    new Store().deleteSessionToken(Const.HS_HEADER);
-    new Store().deleteSessionToken(Const.HS_IS_LOGIN);
+    new Store().deleteSessionToken(Const.USER);
     Actions.login({type: 'reset'});
   }
 
@@ -208,7 +207,7 @@ class Menu extends Component {
     return (
       <ScrollView style={{backgroundColor: '#303030'}}>
         <View style={{marginTop}}>
-          <HeaderMenu logout={() => this.logout()} data={''}/>
+          <HeaderMenu logout={() => this.logout()} data={this.props.profile.user}/>
           {
             menu.map((item, index) => {
               return this.renderMenu(item, index)
