@@ -34,7 +34,7 @@ class HSNS extends Component {
     }
 
     componentWillMount = () => {
-        this.props.getProfile(this.props.profile.user.EMPLOYEE_CODE)
+        this.props.getProfile(2)
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -62,95 +62,99 @@ class HSNS extends Component {
             bounces={false}
             keyboardShouldPersistTaps={'always'}
             >
-            <View style={styles.body}>
-                <View style={{flexDirection: 'row'}}>
-                <View style={{alignItems: 'center'}}>
-                    <View style={styles.ctAvatar}>
-                    <Image style={styles.avatar} source={this.state.pickImage ? {uri: this.state.avatar} :this.state.avatar ? {uri: this.state.avatar + '_100x100.png'} : require('../../icons/avatar_default.jpg')} />
+            {
+                data ? 
+                <View style={styles.body}>
+                    <View style={{flexDirection: 'row'}}>
+                    <View style={{alignItems: 'center'}}>
+                        <View style={styles.ctAvatar}>
+                        <Image style={styles.avatar} source={this.state.pickImage ? {uri: this.state.avatar} :this.state.avatar ? {uri: this.state.avatar + '_100x100.png'} : require('../../icons/avatar_default.jpg')} />
+                        </View>
                     </View>
-                </View>
-                
-                <View style={{flex: 1, marginLeft: 15}}>
-                    <TextShow
-                    label='Tên hiển thị'
-                    value={this.state.full_name}
-                    />
-                    <View style={{flexDirection: 'row', marginTop: 5}}>
-                    <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
-                    <View style={{marginLeft: 20, flexDirection: 'row'}}>
-                        <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
-                        <View style={styles.ctTick}>
+                    
+                    <View style={{flex: 1, marginLeft: 15}}>
+                        <TextShow
+                        label='Tên hiển thị'
+                        value={data.FULL_NAME_VN}
+                        />
+                        <View style={{flexDirection: 'row', marginTop: 5}}>
+                        <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
+                        <View style={{marginLeft: 20, flexDirection: 'row'}}>
+                            <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
+                            <View style={styles.ctTick}>
+                                {
+                                this.state.sex == 1 ?
+                                    <Image source={require('../../icons/ic_check_green.png')}/>
+                                    : null
+                                }
+                            </View>
+                            <Text style={{color: 'rgb(31, 42, 53)'}}>Nam</Text>
+                            </View>
+                            <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
+                            <View style={styles.ctTick}>
                             {
-                            this.state.sex == 1 ?
+                                this.state.sex == 0 ?
                                 <Image source={require('../../icons/ic_check_green.png')}/>
                                 : null
                             }
+                            </View>
+                            <Text style={{color: 'rgb(31, 42, 53)'}}>Nữ</Text>
+                            </View>
                         </View>
-                        <Text style={{color: 'rgb(31, 42, 53)'}}>Nam</Text>
                         </View>
-                        <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
-                        <View style={styles.ctTick}>
-                        {
-                            this.state.sex == 0 ?
-                            <Image source={require('../../icons/ic_check_green.png')}/>
-                            : null
-                        }
-                        </View>
-                        <Text style={{color: 'rgb(31, 42, 53)'}}>Nữ</Text>
-                        </View>
+                        
                     </View>
                     </View>
-                    
+                    <TextShow
+                    label='Email'
+                    value={data.PER_EMAIL}
+                    />
+                    <TextShow
+                    label='Chức danh'
+                    value={this.state.job}
+                    />
+                    <View style={{flexDirection: 'row'}}>
+                    <TextShow
+                        label='Số điện thoại'
+                        value={this.state.telephone}
+                    />
+                    <TextShow
+                        label='Ngày sinh'
+                        value={data.BIRTH_DATE}
+                    />
+                    </View>
+                    <View style={{flexDirection: 'row', }}>
+                    <TextShow
+                        label='Số CMTND'
+                        value={this.state.cmt}
+                    />
+                    <TextShow
+                        label='Ngày cấp'
+                        value={'14-03-2015'}
+                    />
+                    <TextShow
+                        label='Nơi cấp'
+                        value={'CA Hà Nam'}
+                    />
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                    <TextShow
+                        label='Quốc tịch'
+                        value={'Việt Nam'}
+                    />
+                    <TextShow
+                        label='Dân tộc'
+                        value={data.NATIVE_NAME}
+                    />
+                    <TextShow
+                        label='Địa chỉ'
+                        value={data.PER_ADDRESS}
+                    />
+                    </View>
                 </View>
-                </View>
-                <TextShow
-                label='Email'
-                value={this.state.email}
-                />
-                <TextShow
-                label='Chức danh'
-                value={this.state.job}
-                />
-                <View style={{flexDirection: 'row'}}>
-                <TextShow
-                    label='Số điện thoại'
-                    value={this.state.telephone}
-                />
-                <TextShow
-                    label='Ngày sinh'
-                    value={'25-03-1993'}
-                />
-                </View>
-                <View style={{flexDirection: 'row', }}>
-                <TextShow
-                    label='Số CMTND'
-                    value={this.state.cmt}
-                />
-                <TextShow
-                    label='Ngày cấp'
-                    value={'14-03-2015'}
-                />
-                <TextShow
-                    label='Nơi cấp'
-                    value={'CA Hà Nam'}
-                />
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                <TextShow
-                    label='Quốc tịch'
-                    value={'Việt Nam'}
-                />
-                <TextShow
-                    label='Dân tộc'
-                    value={'Kinh'}
-                />
-                <TextShow
-                    label='Địa chỉ'
-                    value={this.state.address}
-                />
-                </View>
-                
-            </View>
+            : null
+            }
+
             </ScrollView>
         </View>
         );

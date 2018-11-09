@@ -21,6 +21,7 @@ import Nav from '../../components/Nav';
 import css from '../../config/css';
 import { Actions } from '../../../node_modules/react-native-router-flux';
 import ItemQTDG from '../../components/TTCN/ItemQTDG';
+import NoData from '../../components/NoData';
 
 const window = Dimensions.get('window');
 
@@ -28,38 +29,44 @@ class QTDG extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-          MNV: '01',
-          HT: 'Lê Linh Duy',
-          NDG: '2016',
-          KDG: '1',
-          KDG1: 'không xác định',
-          TN: '01/01/2018',
-          DN: '12/12/2018',
-          TDDG: 100,
-          XH: 'Tốt',
-          TT: 'Không xác định',
-        },
-        
-      ]
+      	data: []
     }
   }
 
-  render() {
-    return (
-      <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-        <Nav label='Qúa trình đánh giá'/>
-        <FlatList 
-          data={this.state.data}
-          contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem = {data =>  <ItemQTDG data = {data.item}/>}
-        />
-      </View>
-    );
-  }
+  	componentWillMount = () => {
+		this.props.getTrainInCompany(2, 'judge') //danh gia
+	};
+
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.profile.trainCompany && nextProps.profile.trainCompany !== this.props.profile.trainCompany) {
+			this.setState({
+				data: nextProps.profile.trainCompany
+			})
+		}
+	};
+
+	renderFooter = () => {
+		if(this.state.data.length === 0 && !this.props.profile.loading) {
+			return <NoData label='Không có dữ liệu'/>
+		}else return null
+	}
+
+	render() {
+		return (
+		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			<Nav label='Qúa trình đánh giá'/>
+			<FlatList 
+				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
+				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				keyExtractor={(item, index) => index.toString()}
+				renderItem = {data =>  <ItemQTDG data = {data.item}/>}
+			/>
+		</View>
+		);
+	}
 }
+
 
 const styles = StyleSheet.create({
  
@@ -70,4 +77,17 @@ const styles = StyleSheet.create({
 
 });
 
-export default (QTDG)
+import { connect } from 'react-redux';
+import { getTrainInCompany } from '../../actions/profile';
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QTDG)

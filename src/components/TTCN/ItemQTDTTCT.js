@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { family_label, family_value} from '../../config/System'
+import { convertDateTime } from '../Functions';
 
 const ItemQTDTTCT = ({
   data,
@@ -21,7 +22,7 @@ const ItemQTDTTCT = ({
     <Text style={css.txtStatus}>Lĩnh vực đào tạo:  <Text style={css.txtValue}>{data.LVDT}</Text></Text>
     <Text style={css.txtStatus}>Hình thức đào tạo:  <Text style={css.txtValue}>{data.HTDT}</Text></Text>
     <Text style={css.txtStatus}>Thời lượng:  <Text style={css.txtValue}>{data.TL}</Text></Text>
-    <Text style={css.txtStatus}>Thời gian:  <Text style={css.txtValue}>{data.TGBD} - {data.TGKT}</Text></Text>
+    <Text style={css.txtStatus}>Thời gian:  <Text style={css.txtValue}>{convertDateTime(data.FROM_DATE)} - {convertDateTime(data.TO_DATE)}</Text></Text>
     <Text style={css.txtStatus}>Trung tâm đào tạo:  <Text style={css.txtValue}>{data.TTDT}</Text></Text>
     <Text style={css.txtStatus}>Nội dung đào tạo:  <Text style={css.txtValue}>{data.NDDT}</Text></Text>
     <Text style={css.txtStatus}>Mục đích:  <Text style={css.txtValue}>{data.MD}</Text></Text>

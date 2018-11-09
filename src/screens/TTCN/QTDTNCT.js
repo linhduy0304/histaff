@@ -46,19 +46,38 @@ class QTDTNCT extends Component {
     }
   }
 
-  render() {
-    return (
-      <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-        <Nav label='Qúa trình đào tạo ngoài công ty'/>
-        <FlatList 
-          data={this.state.data}
-          contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem = {data =>  <ItemQTDTNCT data = {data.item}/>}
-        />
-      </View>
-    );
-  }
+  	componentWillMount = () => {
+		this.props.getTrainInCompany(2, 'train-in')
+	};
+
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.profile.trainCompany && nextProps.profile.trainCompany !== this.props.profile.trainCompany) {
+			this.setState({
+				data: nextProps.profile.trainCompany
+			})
+		}
+	};
+
+	renderFooter = () => {
+		if(this.state.data.length === 0 && !this.props.profile.loading) {
+		  return <NoData label='Không có dữ liệu'/>
+		}else return null
+	}
+
+	render() {
+		return (
+		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			<Nav label='Qúa trình đào tạo ngoài công ty'/>
+			<FlatList 
+				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
+				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				keyExtractor={(item, index) => index.toString()}
+				renderItem = {data =>  <ItemQTDTNCT data = {data.item}/>}
+			/>
+		</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
@@ -70,4 +89,18 @@ const styles = StyleSheet.create({
 
 });
 
-export default (QTDTNCT)
+import { connect } from 'react-redux';
+import { getTrainInCompany } from '../../actions/profile';
+import NoData from '../../components/NoData';
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QTDTNCT)
