@@ -23,16 +23,23 @@ export const getTrainInCompany = (id, load) => {
         dispatch(loading(true))
         return Profile.getTrainInCompany(id, load).then(res => {
             console.log(res)
+            if(res.code === 500) {
+                dispatch(getTrainInCompanySuccess([]));
+                dispatch(loading(null));
+                return
+            }
             if(res) {
                 dispatch(getTrainInCompanySuccess(res));
                 dispatch(loading(null));
             }else {
                 SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(getTrainInCompanySuccess([]));
                 dispatch(loading(null));
             }
         })
         .catch((error) => {
-          dispatch(loading(null))
+            dispatch(getTrainInCompanySuccess([]));
+            dispatch(loading(null))
         });
     };
 }

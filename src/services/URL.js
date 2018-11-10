@@ -5,4 +5,5 @@ module.exports = {
   url: `${URL}`,
   auth: `${URL}portal`,
   api: `${URL}api`,
+  profile: `${URL}profile`,
 }

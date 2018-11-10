@@ -7,18 +7,19 @@ import {
   Dimensions,
 } from 'react-native';
 import { family_label, family_value} from '../../config/System'
+import { convertDateTime } from '../Functions';
 
 const ItemQTHDLD = ({
   data,
   // onPress = item,
 }) => (
   <View style={css.ctItem}>
-    <Text style={css.txtStatus}>Loại hợp đồng:  <Text style={css.txtValue}>{data.LHD}</Text></Text>
-    <Text style={css.txtStatus}>Số hợp đồng:  <Text style={css.txtValue}>{data.TSHDT}</Text></Text>
-    <Text style={css.txtStatus}>Thời gian:  <Text style={css.txtValue}>{data.NBD} - {data.NKT}</Text></Text>
-    <Text style={css.txtStatus}>Người ký:  <Text style={css.txtValue}>{data.NK}</Text></Text>
-    <Text style={css.txtStatus}>Ngày ký:  <Text style={css.txtValue}>{data.TGK}</Text></Text>
-    <Text style={css.txtStatus}>Chức danh người ký:  <Text style={css.txtValue}>{data.CDNK}</Text></Text>
+    <Text style={css.txtStatus}>Loại hợp đồng:  <Text style={css.txtValue}>{data.CONTRACTTYPE_NAME}</Text></Text>
+    <Text style={css.txtStatus}>Số hợp đồng:  <Text style={css.txtValue}>{data.CONTRACT_NO}</Text></Text>
+    <Text style={css.txtStatus}>Thời gian:  <Text style={css.txtValue}>{convertDateTime(data.CREATED_DATE)} - {convertDateTime(data.EXPIRE_DATE)}</Text></Text>
+    <Text style={css.txtStatus}>Người ký:  <Text style={css.txtValue}>{data.SIGNER_NAME}</Text></Text>
+    <Text style={css.txtStatus}>Ngày ký:  <Text style={css.txtValue}>{data.SIGN_DATE}</Text></Text>
+    <Text style={css.txtStatus}>Chức danh người ký:  <Text style={css.txtValue}>{data.SIGNER_TITLE}</Text></Text>
   </View>
 )
 

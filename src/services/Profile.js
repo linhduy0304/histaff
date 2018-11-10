@@ -9,10 +9,20 @@ export const getTrainInCompany = (id, load) => {
 			return HTTP.get(`${URL.api}/empoloyeetrain/get/${id}`)
 		case 'train-out':
 			return HTTP.get(`${URL.api}/protrainoutcompany/get/${id}`)
-		case 'judge':
+		case 'judge': //danh gia
 			return HTTP.get(`${URL.api}/competencyass/get/${id}`)
 		case 'talent': //nang luc
 			return HTTP.get(`${URL.api}/competencyperiodlist/get/${id}`)
+		case 'discipline':
+			return HTTP.get(`${URL.profile}/discipline?employeeId=${id}`)
+		//khen thuonwgr
+		case 'commend':
+			return HTTP.get(`${URL.profile}/commend?employeeId=${id}`)
+		case 'workingNow':
+			return HTTP.get(`${URL.profile}/working?employeeID=${id}`)
+		case 'contract':
+			console.log(`${URL.api}/contract/get/${id}`)
+			return HTTP.get(`${URL.api}/contract/get/${id}/1/10`)
 		default:
 			return;
 	}

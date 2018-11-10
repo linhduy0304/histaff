@@ -56,6 +56,7 @@ class QTNL extends Component {
 			<Nav label='Qúa trình năng lực'/>
 			<FlatList 
 				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
 				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  <ItemQTNL data = {data.item}/>}
