@@ -6,4 +6,5 @@ module.exports = {
   auth: `${URL}portal`,
   api: `${URL}api`,
   profile: `${URL}profile`,
+  assessment: `${URL}assessment`,
 }

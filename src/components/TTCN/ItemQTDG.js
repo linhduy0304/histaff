@@ -15,8 +15,8 @@ const ItemQTDG = ({
   // onPress = item,
 }) => (
   <View style={css.ctItem}>
-    <Text style={css.txtStatus}>Mã nhân viên:  <Text style={css.txtValue}>{data.MNV}</Text></Text>
-    <Text style={css.txtStatus}>Họ tên:  <Text style={css.txtValue}>{data.HT}</Text></Text>
+    <Text style={css.txtStatus}>Mã nhân viên:  <Text style={css.txtValue}>{data.EMPLOYEE_CODE}</Text></Text>
+    <Text style={css.txtStatus}>Họ tên:  <Text style={css.txtValue}>{data.EMPLOYEE_NAME}</Text></Text>
     <Text style={css.txtStatus}>Năm đánh giá:  <Text style={css.txtValue}>{data.NDG}</Text></Text>
     <Text style={css.txtStatus}>Kỳ đánh giá:  <Text style={css.txtValue}>{data.KDG}</Text></Text>
     <Text style={css.txtStatus}>Kiểu đánh giá:  <Text style={css.txtValue}>{data.KDG1}</Text></Text>

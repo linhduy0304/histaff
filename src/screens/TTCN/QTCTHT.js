@@ -66,6 +66,11 @@ class QTCTHT extends Component {
 	render() {
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			{
+                this.props.profile.loading ?
+                    <LoadingFull/>
+                : null
+            }
 			<Nav label='Qúa trình công tác hiện tại'/>
 			<FlatList 
 				data={this.state.data}
@@ -90,6 +95,7 @@ const styles = StyleSheet.create({
 import { connect } from 'react-redux';
 import { getTrainInCompany } from '../../actions/profile';
 import NoData from '../../components/NoData';
+import LoadingFull from '../../components/LoadingFull';
 
 const mapStateToProps = (state) => {
     return {

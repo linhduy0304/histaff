@@ -21,6 +21,7 @@ import Nav from '../../components/Nav';
 import css from '../../config/css';
 import { Actions } from '../../../node_modules/react-native-router-flux';
 import ItemQTTDLPC from '../../components/TTCN/ItemQTTDLPC';
+import LoadingFull from '../../components/LoadingFull';
 
 const window = Dimensions.get('window');
 
@@ -45,19 +46,24 @@ class QTTDLPC extends Component {
     }
   }
 
-  render() {
-    return (
-      <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-        <Nav label='Qúa trình thay đổi lương - phụ cấp'/>
-        <FlatList 
-          data={this.state.data}
-          contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem = {data =>  <ItemQTTDLPC data = {data.item}/>}
-        />
-      </View>
-    );
-  }
+	render() {
+		return (
+		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			{
+                this.props.profile.loading ?
+                    <LoadingFull/>
+                : null
+            }
+			<Nav label='Qúa trình thay đổi lương - phụ cấp'/>
+			<FlatList 
+				data={this.state.data}
+				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				keyExtractor={(item, index) => index.toString()}
+				renderItem = {data =>  <ItemQTTDLPC data = {data.item}/>}
+			/>
+		</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

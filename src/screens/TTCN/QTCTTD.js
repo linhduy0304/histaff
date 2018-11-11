@@ -21,6 +21,7 @@ import css from '../../config/css';
 import { Actions } from 'react-native-router-flux';
 import ItemQTCTTD from '../../components/TTCN/ItemQTCTTD';
 import Nav from '../../components/Nav';
+import LoadingFull from '../../components/LoadingFull';
 
 const window = Dimensions.get('window');
 
@@ -50,6 +51,11 @@ class QTCTTD extends Component {
   render() {
     return (
       <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+      		{/* {
+                this.props.profile.loading ?
+                    <LoadingFull/>
+                : null
+            } */}
         <Nav label='Qúa trình công tác trước đây'/>
         <FlatList 
           data={this.state.data}
