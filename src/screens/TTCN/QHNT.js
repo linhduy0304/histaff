@@ -113,11 +113,11 @@ class QHNT extends Component {
 	render() {
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-			{
+			{/* {
                 this.props.profile.loading ?
                     <LoadingFull/>
                 : null
-            }
+            } */}
 			<Nav label='Quan hệ nhân thân'/>
 			<FlatList
 				data={this.state.data}

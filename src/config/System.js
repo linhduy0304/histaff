@@ -4,6 +4,8 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 
 export const colorPrimary = '#1ab394';
+export const family_label= 'RobotoCondensed-Regular';
+export const  family_value= 'Comfortaa-Regular';
 export const screen = Dimensions.get('window');
 export const Month = ([
     {

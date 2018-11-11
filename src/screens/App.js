@@ -9,10 +9,12 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            year: getYear().toString(),
         };
     }
 
     componentWillMount = () => {
+        this.props.getPeriod(this.state.year)
         new Store().getSession(Const.USER).then(user => {
             if(user) {
                 this.props.getDataUser(user)
@@ -33,6 +35,8 @@ class App extends Component {
 
 import { connect } from 'react-redux';
 import { getDataUser } from '../actions/auth';
+import { getPeriod } from '../actions/app';
+import { getYear } from '../components/Functions';
 
 const mapStateToProps = (state) => {
     return {
@@ -42,6 +46,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getDataUser: (body) => dispatch(getDataUser(body)),
+        getPeriod: (year) => dispatch(getPeriod(year)),
     }
 }
 

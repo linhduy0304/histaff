@@ -7,4 +7,5 @@ module.exports = {
   api: `${URL}api`,
   profile: `${URL}profile`,
   assessment: `${URL}assessment`,
+  timesheet: `${URL}timesheet`,
 }
