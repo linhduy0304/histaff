@@ -33,7 +33,7 @@ class QTNL extends Component {
 	}
 	  
 	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'talent')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'talent')
 	};
 
 	componentWillReceiveProps = (nextProps) => {

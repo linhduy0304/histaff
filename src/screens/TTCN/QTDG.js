@@ -34,7 +34,7 @@ class QTDG extends Component {
   }
 
   	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'judge') //danh gia
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'judge') //danh gia
 	};
 
 	componentWillReceiveProps = (nextProps) => {

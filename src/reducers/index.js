@@ -3,7 +3,8 @@ import app from './app';
 import auth from './auth';
 import profile from './profile';
 import assessment from './assessment'
-import timesheet from './timesheet'
+import timesheet from './timesheet';
+import payroll from './payroll';
 
 import { combineReducers } from 'redux';
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 	auth,
 	profile,
 	assessment,
-	timesheet
+	timesheet,
+	payroll
 });
 
 export default rootReducer;

@@ -33,7 +33,7 @@ class QTHDLD extends Component {
 	}
 
 	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'contract')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'contract')
 	};
 
 	componentWillReceiveProps = (nextProps) => {

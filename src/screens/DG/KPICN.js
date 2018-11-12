@@ -33,7 +33,7 @@ class KPICN extends Component {
 	}
 
 	componentWillMount = () => {
-		this.props.getAssessment(2, 'kpiEmp') //danh gia
+		this.props.getAssessment(this.props.profile.user.EMPLOYEE_ID, 'kpiEmp') //danh gia
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -87,7 +87,8 @@ import NoData from '../../components/NoData';
 
 const mapStateToProps = (state) => {
     return {
-        assessment: state.assessment
+		assessment: state.assessment,
+		profile: state.profile
     }
 }
 const mapDispatchToProps = (dispatch) => {

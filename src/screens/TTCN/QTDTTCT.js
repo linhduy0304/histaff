@@ -33,7 +33,7 @@ class QTDTTCT extends Component {
   }
 
 	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'train-out')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'train-in')
 	};
 
 	componentWillReceiveProps = (nextProps) => {

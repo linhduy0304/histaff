@@ -87,6 +87,7 @@ export const getProfile = (id) => {
     return dispatch => {
         dispatch(loading(true))
         return Profile.getProfile(id).then(res => {
+            console.log(res)
             if(res) {
                 dispatch(profileSuccess(res));
                 dispatch(loading(null));

@@ -34,7 +34,7 @@ class HSNS extends Component {
     }
 
     componentWillMount = () => {
-        this.props.getProfile(2)
+        this.props.getProfile(this.props.profile.user.EMPLOYEE_ID)
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -47,6 +47,7 @@ class HSNS extends Component {
     
     render() {
         const { data } = this.state;
+        console.log(data)
         return (
         <View style={css.container}>
             {
@@ -75,7 +76,7 @@ class HSNS extends Component {
                     <View style={{flex: 1, marginLeft: 15}}>
                         <TextShow
                         label='Tên hiển thị'
-                        value={data.FULL_NAME_VN}
+                        value={data.FIRST_NAME_VN}
                         />
                         <View style={{flexDirection: 'row', marginTop: 5}}>
                         <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
@@ -111,12 +112,12 @@ class HSNS extends Component {
                     />
                     <TextShow
                     label='Chức danh'
-                    value={this.state.job}
+                    value={data.TITLE_NAME_VN}
                     />
                     <View style={{flexDirection: 'row'}}>
                     <TextShow
                         label='Số điện thoại'
-                        value={this.state.telephone}
+                        value={data.MOBILE_PHONE}
                     />
                     <TextShow
                         label='Ngày sinh'
@@ -126,21 +127,21 @@ class HSNS extends Component {
                     <View style={{flexDirection: 'row', }}>
                     <TextShow
                         label='Số CMTND'
-                        value={this.state.cmt}
+                        value={data.ID_NO}
                     />
                     <TextShow
                         label='Ngày cấp'
-                        value={'14-03-2015'}
+                        value={data.ID_DATE}
                     />
                     <TextShow
                         label='Nơi cấp'
-                        value={'CA Hà Nam'}
+                        value={data.ID_PLACE}
                     />
                     </View>
                     <View style={{flexDirection: 'row'}}>
                     <TextShow
                         label='Quốc tịch'
-                        value={'Việt Nam'}
+                        value={data.NATIONALITY_NAME}
                     />
                     <TextShow
                         label='Dân tộc'
@@ -148,7 +149,7 @@ class HSNS extends Component {
                     />
                     <TextShow
                         label='Địa chỉ'
-                        value={data.PER_ADDRESS}
+                        value={data.WORK_EMAIL}
                     />
                     </View>
                 </View>

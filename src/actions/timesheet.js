@@ -20,10 +20,10 @@ export const getTimeSheetSuccess = data => {
         data
     }
 }
-export const getTimeSheet = (id, load) => {
+export const getTimeSheet = (periodId, empCode) => {
     return dispatch => {
         dispatch(loading(true))
-        return TimeSheet.getTimeSheet(id, load).then(res => {
+        return TimeSheet.getTimeSheet(periodId, empCode).then(res => {
             console.log(res)
             if(res) {
                 dispatch(getTimeSheetSuccess(res));

@@ -61,6 +61,12 @@ class BC extends Component {
 		this.setState({year})
 	}
 
+	setPeriod = periodId => {
+		console.log(periodId)
+		this.setState({period: periodId});
+		this.props.getTimeSheet(periodId, '001001')
+	}
+
 	render() {
 		const {data, year, periods, period} = this.state
 		return (
@@ -85,7 +91,7 @@ class BC extends Component {
 						title={'Kỳ công'} 
 						data={periods}
 						value={period}
-						onChange={(period) => this.setState({period})}
+						onChange={(period) => this.setPeriod(period)}
 					/>
 				</View>
 				<Button 
@@ -122,7 +128,7 @@ const styles = StyleSheet.create({
 });
 
 import { connect } from 'react-redux';
-// import { getTimeSheet } from '../actions/timesheet';
+import { getTimeSheet } from '../actions/timesheet';
 import { getPeriod } from '../actions/app';
 import NoData from '../components/NoData';
 import LoadingFull from '../components/LoadingFull';
@@ -137,7 +143,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getPeriod: (year) => dispatch(getPeriod(year)),
+		getPeriod: (year) => dispatch(getPeriod(year)),
+		getTimeSheet: (periodId, empCode) => dispatch(getTimeSheet(periodId, empCode)),
     }
 }
 

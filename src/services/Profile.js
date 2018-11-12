@@ -21,7 +21,6 @@ export const getTrainInCompany = (id, load) => {
 		case 'workingNow':
 			return HTTP.get(`${URL.profile}/working?employeeID=${id}`)
 		case 'contract':
-			console.log(`${URL.api}/contract/get/${id}`)
 			return HTTP.get(`${URL.api}/contract/get/${id}/1/10`)
 		default:
 			return;

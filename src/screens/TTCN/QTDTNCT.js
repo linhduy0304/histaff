@@ -6,15 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Picker, 
-  FlatList,
-  Dimensions,
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    Picker, 
+    FlatList,
+    Dimensions,
 } from 'react-native';
 
 import css from '../../config/css';
@@ -23,31 +23,15 @@ import ItemQTDTNCT from '../../components/TTCN/ItemQTDTNCT';
 import Nav from '../../components/Nav';
 
 class QTDTNCT extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        {
-          time_start: '12/1/2017',
-          time_end: '12/7/2017',
-          NTN: '15/06/2018',
-          TT: '',
-          HTDT: '',
-          CN: '6 tháng',
-          KQDT: '12/1/2017',
-          BCCC: '12/07/2017',
-          NHL: 'ITPlus',
-          NHHL: '',
-          TTPD: '',
-          LD: '',
-        },
-        
-      ]
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        }
     }
-  }
 
   	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'train-in')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'train-out')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -87,10 +71,10 @@ class QTDTNCT extends Component {
 
 const styles = StyleSheet.create({
  
-  body: {
-    padding: 15,
-    paddingBottom: 30
-  },
+    body: {
+        padding: 15,
+        paddingBottom: 30
+    },
 
 });
 

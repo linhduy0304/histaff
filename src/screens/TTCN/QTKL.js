@@ -32,7 +32,7 @@ class QTKL extends Component {
     	}
 	}
 	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'discipline') //danh gia
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'discipline') //danh gia
 	};
 
 	componentWillReceiveProps = (nextProps) => {

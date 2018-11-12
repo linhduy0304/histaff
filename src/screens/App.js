@@ -16,6 +16,7 @@ class App extends Component {
     componentWillMount = () => {
         this.props.getPeriod(this.state.year)
         new Store().getSession(Const.USER).then(user => {
+            console.log(user)
             if(user) {
                 this.props.getDataUser(user)
                 Actions.home({type: 'reset'})

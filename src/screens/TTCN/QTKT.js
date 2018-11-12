@@ -33,7 +33,7 @@ class QTKT extends Component {
 	}
 
 	componentWillMount = () => {
-		this.props.getTrainInCompany(2, 'commend')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'commend')
 	};
 
 	componentWillReceiveProps = (nextProps) => {

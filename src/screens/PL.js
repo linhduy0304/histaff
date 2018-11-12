@@ -39,6 +39,15 @@ class PL extends Component {
 		}
 	}
 
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.payroll.periods && nextProps.payroll.periods !== this.props.payroll.periods) {
+			this.setState({
+				periods: nextProps.payroll.periods,
+			})
+		}
+	};
+	
+
 	renderFooter = () => {
 		if(this.state.data.length === 0 && !this.props.payroll.loading) {
 		return <NoData label='Không có dữ liệu'/>
@@ -47,13 +56,28 @@ class PL extends Component {
 
 	setPeriod = period => {
 		this.setState({period})
-		this.props.getPayroll(period, 2)
+	}
+
+	setYear = (year) => {
+		this.setState({year})
+		this.props.getPeriod(year)
+	}
+
+
+	next = () => {
+		this.props.getPayroll(this.state.period, this.props.profile.user.EMPLOYEE_ID)
 	}
 
 	render() {
+		console.log(this.props)
 		const {data, year, periods, period} = this.state
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			{
+				this.props.payroll.loading ?
+					<LoadingFull/>
+				: null
+			}
 			<Nav label='Phiếu lương'/>
 			<View style={styles.content}>
 			<View style={{flexDirection: 'row', padding: 15, backgroundColor: '#fff', alignItems: 'center'}}>
@@ -61,8 +85,8 @@ class PL extends Component {
 					<TypeLot 
 						title={'Năm'} 
 						data={Year}
-						value={this.state.year}
-						onChange={(year) => this.setState({year})}
+						value={year}
+						onChange={(year) => this.setYear(year)}
 					/>
 				</View>
 				<View style={{flex: 1}}>
@@ -77,11 +101,12 @@ class PL extends Component {
 					title = 'Xem'
 					width = {100}
 					marginTop = {0}
+					onPress={this.next}
 				/>
 			
 			</View>
 			<FlatList 
-				data={this.state.data}
+				data={data}
 				ListFooterComponent={this.renderFooter}
 				keyExtractor={(item, index) => index.toString()}
 				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
@@ -94,15 +119,13 @@ class PL extends Component {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-  },
-
+	content: {
+		flex: 1,
+	},
 });
 
 import { connect } from 'react-redux';
-import { getPayroll } from '../actions/payroll';
-import { getPeriod } from '../actions/app';
+import { getPayroll, getPeriod } from '../actions/payroll';
 import NoData from '../components/NoData';
 import LoadingFull from '../components/LoadingFull';
 import ModalPeriod from '../components/ModalPeriod';
@@ -111,7 +134,8 @@ import PickerPeriod from '../components/PickerPeriod';
 const mapStateToProps = (state) => {
     return {
 		payroll: state.payroll,
-		app: state.app
+		app: state.app,
+		profile: state.profile,
     }
 }
 const mapDispatchToProps = (dispatch) => {
