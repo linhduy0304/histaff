@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {family_label, family_value} from '../../config/System'
+import { convertDateTime } from '../Functions';
 
 const ItemQTCTTD = ({
   data,
@@ -17,24 +18,24 @@ const ItemQTCTTD = ({
   <View style={css.ctItem}>
     <View style={css.ctName}>
       <Image style={css.icName} source={require('../../icons/ic_company.png')} />
-      <Text style={css.txtName}>{data.name}</Text>
+      <Text style={css.txtName}>{data.COMPANY_NAME}</Text>
     </View>
     <View style={css.ctName}>
       <Image style={css.icName} source={require('../../icons/ic_phone.png')} />
-      <Text style={css.txtName}>{data.phone}</Text>
+      <Text style={css.txtName}>{data.TELEPHONE}</Text>
     </View>
     <View style={css.ctName}>
       <Image style={css.icName} source={require('../../icons/ic_location.png')} />
-      <Text style={css.txtName}>{data.adress}</Text>
+      <Text style={css.txtName}>{data.COMPANY_ADDRESS}</Text>
     </View>
     <View style={css.ctName}>
       <Image style={css.icName} source={require('../../icons/ic_dollar.png')} />
-      <Text style={css.txtName}>{data.salary}</Text>
+      <Text style={css.txtName}>{data.SALARY}</Text>
     </View>
-    <Text style={css.txtStatus}>Thời gian: <Text style={css.txtValue}>{data.time_start} - {data.time_end}</Text></Text>
-    <Text style={css.txtStatus}>Lý do nghỉ: <Text style={css.txtValue}>{data.reason_leave}</Text></Text>
-    <Text style={css.txtStatus}>Trạng thái: <Text style={css.txtValue}>{data.stauts}</Text></Text>
-    <Text style={css.txtStatus}>Lý do không phê duyệt: <Text style={css.txtValue}>{data.reason}</Text></Text>
+    <Text style={css.txtStatus}>Thời gian: <Text style={css.txtValue}>{convertDateTime(data.JOIN_DATE)} - {convertDateTime(data.END_DATE)}</Text></Text>
+    <Text style={css.txtStatus}>Lý do nghỉ: <Text style={css.txtValue}>{data.TER_REASON}</Text></Text>
+    <Text style={css.txtStatus}>Trạng thái: <Text style={css.txtValue}>{data.STATUS}</Text></Text>
+    <Text style={css.txtStatus}>Lý do không phê duyệt: <Text style={css.txtValue}>{data.REASON_UNAPROVE}</Text></Text>
   </View>
 )
 

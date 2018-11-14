@@ -14,6 +14,7 @@ class App extends Component {
     }
 
     componentWillMount = () => {
+        this.props.getTypeLeave()
         this.props.getPeriod(this.state.year)
         new Store().getSession(Const.USER).then(user => {
             console.log(user)
@@ -36,7 +37,7 @@ class App extends Component {
 
 import { connect } from 'react-redux';
 import { getDataUser } from '../actions/auth';
-import { getPeriod } from '../actions/app';
+import { getPeriod, getTypeLeave } from '../actions/app';
 import { getYear } from '../components/Functions';
 
 const mapStateToProps = (state) => {
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getDataUser: (body) => dispatch(getDataUser(body)),
         getPeriod: (year) => dispatch(getPeriod(year)),
+        getTypeLeave: () => dispatch(getTypeLeave()),
     }
 }
 

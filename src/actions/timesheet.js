@@ -1,12 +1,42 @@
 
 import {
     TIMESHEET_LOADING,
-    TIMESHEET_SUCCESS
+    TIMESHEET_SUCCESS,
+    TIMESHEET_PERIOD_SUCCESS
 } from "../config/types";
-
-const TimeSheet = require('../services/TimeSheet');
+import SimpleToast from 'react-native-simple-toast';
 import { Actions } from 'react-native-router-flux';
 
+const TimeSheet = require('../services/TimeSheet');
+const App = require('../services/App');
+
+// getPeriod
+export const getPeriodSuccess = data => {
+    return {
+        type: TIMESHEET_PERIOD_SUCCESS,
+        data
+    }
+}
+export const getPeriod = year => {
+    return dispatch => {
+        dispatch(loading(true))
+        return App.getPeriod(year).then(res => {
+            console.log(res)
+            if(res) {
+                dispatch(getPeriodSuccess(res));
+                dispatch(loading(null));
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(loading(null));
+            }
+        })
+        .catch((error) => {
+          dispatch(loading(null))
+        });
+    };
+}
+
+//loading
 export const loading = (data) => {
     return {
         type: TIMESHEET_LOADING,
@@ -20,10 +50,11 @@ export const getTimeSheetSuccess = data => {
         data
     }
 }
-export const getTimeSheet = (periodId, empCode) => {
+export const getTimeSheet = (periodId, empId) => {
+    console.log(periodId, empId)
     return dispatch => {
         dispatch(loading(true))
-        return TimeSheet.getTimeSheet(periodId, empCode).then(res => {
+        return TimeSheet.getTimeSheet(periodId, empId).then(res => {
             console.log(res)
             if(res) {
                 dispatch(getTimeSheetSuccess(res));

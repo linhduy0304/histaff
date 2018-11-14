@@ -5,6 +5,7 @@ import profile from './profile';
 import assessment from './assessment'
 import timesheet from './timesheet';
 import payroll from './payroll';
+import lot from './lot';
 
 import { combineReducers } from 'redux';
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	profile,
 	assessment,
 	timesheet,
-	payroll
+	payroll,
+	lot
 });
 
 export default rootReducer;

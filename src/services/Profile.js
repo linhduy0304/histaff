@@ -22,6 +22,10 @@ export const getTrainInCompany = (id, load) => {
 			return HTTP.get(`${URL.profile}/working?employeeID=${id}`)
 		case 'contract':
 			return HTTP.get(`${URL.api}/contract/get/${id}/1/10`)
+		case 'family':
+			return HTTP.get(`${URL.profile}/family-edit?employeeId=${id}`)
+		case 'workingBefore':
+			return HTTP.get(`${URL.profile}/working-before?employeeId=${id}`)
 		default:
 			return;
 	}

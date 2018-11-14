@@ -8,4 +8,5 @@ module.exports = {
   profile: `${URL}profile`,
   assessment: `${URL}assessment`,
   timesheet: `${URL}timesheet`,
+  attendance: `${URL}attendance`,
 }

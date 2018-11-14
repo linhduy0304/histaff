@@ -1,7 +1,7 @@
 
 import {
-  Alert,
-  Platform
+	Alert,
+	Platform
 } from "react-native";
 
 export function get(url) {
@@ -28,15 +28,16 @@ export function get(url) {
   }
 
 export function post(url, body) {
+    console.log(JSON.stringify(body))
     return fetch(
         url, 
         {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
         }
     ).then(res => {
         return res.json()

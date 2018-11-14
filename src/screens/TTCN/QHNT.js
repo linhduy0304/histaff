@@ -16,7 +16,6 @@ import {family_label, family_value} from '../../config/System';
 import css from '../../config/css';
 import { Actions } from 'react-native-router-flux';
 import Nav from '../../components/Nav';
-import LoadingFull from '../../components/LoadingFull';
 
 const window = Dimensions.get('window');
 
@@ -24,87 +23,50 @@ class QHNT extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		data: [
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			},
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			},
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			},
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			},
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			},
-			{
-			full_name: 'LE DUY BINH',
-			relation: 'Em trai',
-			birthday: '23-05-1996',
-			adress: 'Kim Bang Ha Nam',
-			stauts: 'Chưa duyệt',
-			reason: '',
-			note: '',
-			}
-		]
+		data: []
 		}
-  	}
+	}
+	  
+	componentWillMount = () => {
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'family')
+	};
+
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.profile.trainCompany && nextProps.profile.trainCompany !== this.props.profile.trainCompany) {
+			this.setState({
+				data: nextProps.profile.trainCompany
+			})
+		}
+	};
+
+	renderFooter = () => {
+		if(this.state.data.length === 0 && !this.props.profile.loading) {
+		return <NoData label='Không có dữ liệu'/>
+		}else return null
+	}
 
 	renderItem(data, index) {
 		return (
 		<View key={index} style={styles.ctItem}>
 			<View style={styles.ctName}>
 			<Image style={styles.icName} source={require('../../icons/ic_user.png')} />
-			<Text style={styles.txtName}>{data.full_name}</Text>
+			<Text style={styles.txtName}>{data.FULLNAME}</Text>
 			</View>
 			<View style={styles.ctName}>
 			<Image style={styles.icName} source={require('../../icons/ic_relation.png')} />
-			<Text style={styles.txtName}>{data.relation}</Text>
+			<Text style={styles.txtName}>{data.RELATION_NAME}</Text>
 			</View>
 			<View style={styles.ctName}>
 			<Image style={styles.icName} source={require('../../icons/ic_birthday.png')} />
-			<Text style={styles.txtName}>{data.birthday}</Text>
+			<Text style={styles.txtName}>{data.BIRTH_DATE}</Text>
 			</View>
 			<View style={styles.ctName}>
 			<Image style={styles.icName} source={require('../../icons/ic_location.png')} />
-			<Text style={styles.txtName}>{data.adress}</Text>
+			<Text style={styles.txtName}>{data.ADDRESS}</Text>
 			</View>
-			<Text style={styles.txtStatus}>Trạng thái: <Text style={styles.txtValue}>{data.stauts}</Text></Text>
-			<Text style={styles.txtStatus}>Lý do: <Text style={styles.txtValue}>{data.reason}</Text></Text>
-			<Text style={styles.txtStatus}>Ghi chú: <Text style={styles.txtValue}>{data.note}</Text></Text>
+			<Text style={styles.txtStatus}>Trạng thái: <Text style={styles.txtValue}>{data.STATUS_NAME}</Text></Text>
+			<Text style={styles.txtStatus}>Lý do: <Text style={styles.txtValue}>{data.REASON_UNAPROVE}</Text></Text>
+			<Text style={styles.txtStatus}>Ghi chú: <Text style={styles.txtValue}>{data.REMARK}</Text></Text>
 		</View>
 		)
 	}
@@ -113,14 +75,15 @@ class QHNT extends Component {
 	render() {
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-			{/* {
+			{
                 this.props.profile.loading ?
                     <LoadingFull/>
                 : null
-            } */}
+            }
 			<Nav label='Quan hệ nhân thân'/>
 			<FlatList
 				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
 				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  this.renderItem(data.item, data.index)}
@@ -168,4 +131,19 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default (QHNT)
+import { connect } from 'react-redux';
+import { getTrainInCompany } from '../../actions/profile';
+import NoData from '../../components/NoData';
+import LoadingFull from '../../components/LoadingFull';
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(QHNT)

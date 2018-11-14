@@ -4,6 +4,7 @@ import {
     PAYROLL_LOADING,
     PAYROLL_PERIOD_SUCCESS
 } from "../config/types";
+import SimpleToast from 'react-native-simple-toast';
 
 const Payroll = require('../services/Payroll');
 const App = require('../services/App');

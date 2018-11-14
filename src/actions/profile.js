@@ -5,6 +5,7 @@ import {
     PROFILE_FAMILY_SUCCESS,
     PROFILE_TRAIN_IN_COMPANY_SUCCESS
 } from "../config/types";
+import SimpleToast from 'react-native-simple-toast';
 
 const Profile = require('../services/Profile');
 import Const from '../services/Const';
@@ -19,6 +20,7 @@ export const getTrainInCompanySuccess = data => {
     }
 }
 export const getTrainInCompany = (id, load) => {
+    console.log(id, load)
     return dispatch => {
         dispatch(loading(true))
         return Profile.getTrainInCompany(id, load).then(res => {

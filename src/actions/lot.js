@@ -1,34 +1,34 @@
 
 import {
-    ASSESSMENT_LOADING,
-    ASSESSMENT_SUCCESS
+    LOT_REGISTER_LEAVE_SUCCESS,
+    LOT_LOADING
 } from "../config/types";
-
-const Assessment = require('../services/Assessment');
-import { Actions } from 'react-native-router-flux';
 import SimpleToast from 'react-native-simple-toast';
 
+const Lot = require('../services/Lot');
 
-export const loading = (data) => {
+//loading
+export const loading = data => {
     return {
-        type: ASSESSMENT_LOADING,
+        type: LOT_LOADING,
         data
     }
 }
-
-export const getAssessmentSuccess = data => {
+// getPeriod
+export const getRegisterLeaveSuccess = data => {
     return {
-        type: ASSESSMENT_SUCCESS,
+        type: LOT_REGISTER_LEAVE_SUCCESS,
         data
     }
 }
-export const getAssessment = (id, load) => {
+export const getRegisterLeave = (empId, body) => {
+    console.log(body)
     return dispatch => {
         dispatch(loading(true))
-        return Assessment.getAssessment(id, load).then(res => {
+        return Lot.getRegisterLeave(empId, body).then(res => {
             console.log(res)
             if(res) {
-                dispatch(getAssessmentSuccess(res));
+                dispatch(getRegisterLeaveSuccess(res));
                 dispatch(loading(null));
             }else {
                 SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')

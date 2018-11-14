@@ -24,183 +24,208 @@ import TypeLot from '../../components/LOT/TypeLot';
 import InputReason from '../../components/LOT/InputReason';
 import DatePicker from 'react-native-datepicker';
 import ItemFilter from '../../components/LOT/ItemFilter';
-import {LOT} from '../../config/System'
+import {LOT, screen} from '../../config/System'
 import Button from '../../components/Button';
+import NoData from '../../components/NoData';
+import LoadingFull from '../../components/LoadingFull';
 
-export default class DKN extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'P/B',
-      reason: '',
-      arrFilter: [0, 1, 2, 3],
-      date: '',
-      time_start: '',
-      time_end: '',
-      data: [
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
+class DKN extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.app.typeLeave[0].CODE,
+            reason: '',
+            arrFilter: [0, 1, 2, 3],
+            date: '',
+            time_start: '',
+            time_end: '',
+            data: [],
         }
-      ],
     }
-  }
 
-  renderItem(data) {
-    return (
-      <View style={styles.ctItem}>
-        <Text>{data.time}</Text> 
-        <Text>{data.time}</Text>  
-        <Text>{data.time}</Text> 
-        <Text>{data.time}</Text> 
-        <Text>{data.time}</Text> 
+    componentWillMount = () => {
+        this.props.getRegisterLeave(this.props.profile.user.EMPLOYEE_ID, this.state.arrFilter)
+    };
 
-      </View>
-    )
-  }
+    componentWillReceiveProps = (nextProps) => {
+        if(nextProps.lot.leaves && nextProps.lot.leaves !== this.props.lot.leaves) {
+            this.setState({
+                data: nextProps.lot.leaves
+            })
+        }
+    };
 
-  filter(value) {
-    var a = this.state.arrFilter;
-    for(var i = 0; i <= a.length; i++) {
-      if(a[i] === value) {
-        a.splice(i, 1);
-        this.setState({
-          arrFilter: a
-        });
-        return;
-      }
-    }
-    a.unshift(value);
-    this.setState({
-      arrFilter: a
-    })
-  }
+    renderItem(data) {
+        return (
+        <View style={styles.ctItem}>
+            <Text>{data.time}</Text> 
+            <Text>{data.time}</Text>  
+            <Text>{data.time}</Text> 
+            <Text>{data.time}</Text> 
+            <Text>{data.time}</Text> 
 
-  renderHeader() {
-    return (
-      <View style={{backgroundColor: '#fff',}}>
-        <View style={{padding: 15}}>
-            <TypeLot
-              value={this.state.value}
-              title={'Loại nghỉ'} 
-              data={LOT}
-              onChange={(value) => this.setState({value})}
-            />
-            <InputReason 
-              onChange={reason => this.setState({reason})}
-              value={this.state.reason}
-            />
-            <View style={styles.ctDate}>
-              <DatePicker
-                style={{flex: 1}}
-                date={this.state.time_start}
-                mode="date"
-                placeholder="Từ ngày"
-                format="DD-MM-YYYY"
-                showIcon={false}
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                minDate='01-01-1900'
-                maxDate={'01-01-2200'}
-                onDateChange={(date) => this.setState({time_start: date})}
-                customStyles={
-                  {
-                      dateInput: {
-                        // marginLeft: 40,
-                      borderWidth: 0,
-                      alignItems:'flex-start',
-                      flex: 1,
-                    },
-                    placeholderText:{color:'#c2c5d0',fontSize: 15}
-                }}
-              />
-              <Text style={{marginLeft: 10, marginRight: 10}}>-></Text>
-              <DatePicker
-                style={{flex: 1}}
-                date={this.state.time_end}
-                mode="date"
-                placeholder="Đến ngày"
-                format="DD-MM-YYYY"
-                showIcon={false}
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                minDate='01-01-1900'
-                maxDate={'01-01-2200'}
-                onDateChange={(date) => this.setState({time_end: date})}
-                customStyles={
-                  {
-                      dateInput: {
-                        // marginLeft: 40,
-                      borderWidth: 0,
-                      alignItems:'flex-start',
-                      flex: 1,
-                    },
-                    placeholderText:{color:'#c2c5d0',fontSize: 15}
-                }}
-              />
-            </View>
-            <Button 
-                title = 'Gửi đăng ký nghỉ'
-                color = 'white'
-                marginTop = {15}
-                onPress = {() => null}
-                fontSize = {16}
-                fontWeight = '500'
-                backgroundColor = 'rgb(38, 114, 203)'
-              />
-            <View style={{flexDirection: 'row', marginTop: 15}}>
-              <Image style={{height: 20, width: 20, marginRight: 15}} source={require('../../icons/ic_filter.png')} />
-              <View style={{flex: 1}}>
-                <View style={{flexDirection: 'row'}}>
-                  <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Đăng ký', value: 0, color: 'green'}}/>
-                  <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Chờ phê duyệt', value: 1, color: '#D83601'}}/>
-                </View>
-                <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Đã phê duyệt', value: 2, color: 'blue'}}/>
-                  <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Từ chối', value: 3, color: 'red'}}/>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.ctTitle}>
-            <Text style={styles.txtTitle}>Danh sách đăng ký nghỉ</Text>
-          </View>
-      </View>
-    )
-  }
-
-
-  render() {
-    return (
-      <View style={css.container}>
-        
-        <Nav label={this.props.title}/>
-        <View style={styles.content}>
-          
-          <View style={{flex: 1, backgroundColor: '#e7e7e7'}}>
-            <FlatList 
-              data={this.state.data}
-              ListHeaderComponent = {() => this.renderHeader()}
-              keyExtractor={(item, index) => index.toString()}
-              contentContainerStyle={{ backgroundColor: '#e7e7e7',paddingBottom: 15}}
-              renderItem={data => this.renderItem(data.item)}
-            />
-          </View>
         </View>
-      </View>
-    );
-  }
+        )
+    }
+
+    filter(value) {
+        var a = this.state.arrFilter;
+        for(var i = 0; i <= a.length; i++) {
+        if(a[i] === value) {
+            a.splice(i, 1);
+            this.setState({
+            arrFilter: a
+            });
+            return;
+        }
+        }
+        a.unshift(value);
+        this.setState({
+        arrFilter: a
+        })
+    }
+
+    submit = () => {
+        this.props.getRegisterLeave(this.props.profile.user.EMPLOYEE_ID, this.state.arrFilter)
+    }
+
+    renderHeader() {
+        return (
+        <View style={{backgroundColor: '#fff',}}>
+            <View style={{padding: 15}}>
+                <TypeLot
+                    value={this.state.value}
+                    title={'Loại nghỉ'} 
+                    data={this.props.app.typeLeave}
+                    onChange={(value) => this.setState({value})}
+                />
+                <InputReason 
+                    onChange={reason => this.setState({reason})}
+                    value={this.state.reason}
+                />
+                <View style={styles.ctDate}>
+                    <DatePicker
+                        style={{flex: 1}}
+                        date={this.state.time_start}
+                        mode="date"
+                        placeholder="Từ ngày"
+                        format="DD-MM-YYYY"
+                        showIcon={false}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        minDate='01-01-1900'
+                        maxDate={'01-01-2200'}
+                        onDateChange={(date) => this.setState({time_start: date})}
+                        customStyles={
+                        {
+                            dateInput: {
+                                // marginLeft: 40,
+                            borderWidth: 0,
+                            alignItems:'flex-start',
+                            flex: 1,
+                            },
+                            placeholderText:{color:'#c2c5d0',fontSize: 15}
+                        }}
+                    />
+                    <Text style={{marginLeft: 10, marginRight: 10}}>-></Text>
+                    <DatePicker
+                        style={{flex: 1}}
+                        date={this.state.time_end}
+                        mode="date"
+                        placeholder="Đến ngày"
+                        format="DD-MM-YYYY"
+                        showIcon={false}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        minDate='01-01-1900'
+                        maxDate={'01-01-2200'}
+                        onDateChange={(date) => this.setState({time_end: date})}
+                        customStyles={
+                        {
+                            dateInput: {
+                                // marginLeft: 40,
+                            borderWidth: 0,
+                            alignItems:'flex-start',
+                            flex: 1,
+                            },
+                            placeholderText:{color:'#c2c5d0',fontSize: 15}
+                        }}
+                    />
+                    </View>
+                    <Button 
+                        title = 'Gửi đăng ký nghỉ'
+                        color = 'white'
+                        marginTop = {15}
+                        onPress = {() => null}
+                        fontSize = {16}
+                        fontWeight = '500'
+                        backgroundColor = 'rgb(38, 114, 203)'
+                    />
+                    
+                
+            </View>
+            <View style={{alignItems: 'center'}}>
+                <View style={styles.ctTitle}>
+                    <Text style={styles.txtTitle}>Danh sách đăng ký nghỉ</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginTop: 15}}>
+                    <Image style={{height: 20, width: 20, marginRight: 15}} source={require('../../icons/ic_filter.png')} />
+                    <View style={{flex: 1}}>
+                        <View style={{flexDirection: 'row'}}>
+                            <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Đăng ký', value: 0, color: 'green'}}/>
+                            <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Chờ phê duyệt', value: 1, color: '#D83601'}}/>
+                        </View>
+                        <View style={{flexDirection: 'row', marginTop: 10}}>
+                            <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Đã phê duyệt', value: 2, color: 'blue'}}/>
+                            <ItemFilter filter={this.state.arrFilter} onPress={(value) => this.filter(value)} data={{title: 'Từ chối', value: 3, color: 'red'}}/>
+                        </View>
+                    </View>
+                </View>
+                <Button 
+                    title = 'Xem'
+                    color = 'white'
+                    marginTop = {15}
+                    onPress = {this.submit}
+                    fontSize = {16}
+                    fontWeight = '500'
+                    backgroundColor = 'rgb(38, 114, 203)'
+                />
+            </View>
+           
+        </View>
+        )
+    }
+
+    renderFooter = () => {
+		if(this.state.data.length === 0 && !this.props.lot.loading) {
+			return <NoData label='Không có dữ liệu'/>
+		}else return null
+	}
+
+    render() {
+        return (
+        <View style={css.container}>
+            {
+                this.props.lot.loading ?
+                    <LoadingFull/>
+                : null
+            }
+            <Nav label={this.props.title}/>
+            <View style={styles.content}>
+                <View style={{flex: 1}}>
+                    <FlatList 
+                        data={this.state.data}
+                        ListHeaderComponent = {() => this.renderHeader()}
+                        ListFooterComponent={this.renderFooter}
+                        keyExtractor={(item, index) => index.toString()}
+                        contentContainerStyle={{ paddingBottom: 15}}
+                        renderItem={data => this.renderItem(data.item)}
+                    />
+                </View>
+            </View>
+        </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -224,10 +249,27 @@ const styles = StyleSheet.create({
   ctTitle: {
     backgroundColor: '#D83601',
     padding: 10,
-    paddingLeft: 15
-
+    paddingLeft: 15,
+    width: screen.width
   },
   content: {
     flex: 1,
   },
 });
+
+import { connect } from 'react-redux';
+import { getRegisterLeave } from '../../actions/lot';
+const mapStateToProps = (state) => {
+    return {
+        app: state.app,
+        profile: state.profile,
+        lot: state.lot
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getRegisterLeave: (empId, body) => dispatch(getRegisterLeave(empId, body)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DKN);

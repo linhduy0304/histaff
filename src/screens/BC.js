@@ -33,22 +33,18 @@ class BC extends Component {
 			year: getYear().toString(),
 			data: [],
 			open: false,
-			period: '',
+			periodId: '',
 			periods: this.props.app.periods
 		}
 	}
 
-	// componentWillMount = () => {
-	// 	this.props.getPeriod(this.state.year)
-	// };
-
-	// componentWillReceiveProps = (nextProps) => {
-	// 	if(nextProps.app.periods && nextProps.app.periods !== this.props.app.periods) {
-    //         this.setState({
-    //             data: nextProps.app.periods
-    //         })
-    //     }
-	// };
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.timesheet.periods && nextProps.timesheet.periods !== this.props.timesheet.periods) {
+			this.setState({
+				periods: nextProps.timesheet.periods,
+			})
+		}
+	};
 
 	renderFooter = () => {
 		if(this.state.data.length === 0 && !this.props.timesheet.loading) {
@@ -63,12 +59,15 @@ class BC extends Component {
 
 	setPeriod = periodId => {
 		console.log(periodId)
-		this.setState({period: periodId});
-		this.props.getTimeSheet(periodId, '001001')
+		this.setState({periodId});
+	}
+
+	submit = () => {
+		this.props.getTimeSheet(this.state.periodId, this.props.profile.user.EMPLOYEE_ID)
 	}
 
 	render() {
-		const {data, year, periods, period} = this.state
+		const {data, year, periods, periodId} = this.state
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
 			{
@@ -90,18 +89,20 @@ class BC extends Component {
 					<PickerPeriod
 						title={'Kỳ công'} 
 						data={periods}
-						value={period}
-						onChange={(period) => this.setPeriod(period)}
+						value={periodId}
+						onChange={(periodId) => this.setPeriod(periodId)}
 					/>
 				</View>
 				<Button 
 					title = 'Xem'
 					width = {100}
+					onPress={this.submit}
 					marginTop = {0}
 				/>
 			</View>
 			<FlatList 
 				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
 				keyExtractor={(item, index) => index.toString()}
 				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
 				renderItem = {data =>  <ItemBC data = {data.item}/>}
@@ -128,8 +129,7 @@ const styles = StyleSheet.create({
 });
 
 import { connect } from 'react-redux';
-import { getTimeSheet } from '../actions/timesheet';
-import { getPeriod } from '../actions/app';
+import { getTimeSheet, getPeriod } from '../actions/timesheet';
 import NoData from '../components/NoData';
 import LoadingFull from '../components/LoadingFull';
 import ModalPeriod from '../components/ModalPeriod';
@@ -138,7 +138,8 @@ import PickerPeriod from '../components/PickerPeriod';
 const mapStateToProps = (state) => {
     return {
 		timesheet: state.timesheet,
-		app: state.app
+		app: state.app,
+		profile: state.profile,
     }
 }
 const mapDispatchToProps = (dispatch) => {

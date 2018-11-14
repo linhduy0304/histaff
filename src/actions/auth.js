@@ -8,6 +8,7 @@ const Auth = require('../services/Auth');
 import Const from '../services/Const';
 import Store from '../services/Store';
 import { Actions } from 'react-native-router-flux';
+import SimpleToast from 'react-native-simple-toast';
 
 export const getDataUser = data => {
     return {

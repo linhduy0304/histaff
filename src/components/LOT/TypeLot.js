@@ -26,7 +26,7 @@ const TypeLot = ({
       {
         data.map((item, index) => {
           return (
-            <Picker.Item key={index} label={item.title} value={item.value} />
+            <Picker.Item key={index} label={item.NAME_VN} value={item.CODE} />
           )
         })
       }
