@@ -1,36 +1,37 @@
 
 import React from 'react'
 import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  Picker
+    View,
+    Text,
+    Image,
+    TouchableOpacity,
+    StyleSheet,
+    Dimensions,
+    Picker
 } from 'react-native';
 
 const TypeLot = ({
-  value,
-  data,
-  title,
-  onChange = value
+    value,
+    data,
+    title,
+    onChange = value
 }) => (
-  <View style={css.container}>
-    <Text style={css.txt}>{title}</Text>
-    <Picker
-      style={css.selectOption}
-      selectedValue={value}
-      onValueChange={(value) => onChange(value)}
-    >
-      {
-        data.map((item, index) => {
-          return (
-            <Picker.Item key={index} label={item.NAME_VN} value={item.CODE} />
-          )
-        })
-      }
-    </Picker>
+	<View style={css.container}>
+		<Text style={css.txt}>{title}</Text>
+		<Picker
+			mode = 'dropdown'
+			style={css.selectOption}
+			selectedValue={value}
+			onValueChange={(value) => onChange(value)}
+		>
+		{
+			data.map((item, index) => {
+			return (
+				<Picker.Item key={index} label={item.NAME_VN} value={item.ID} />
+			)
+			})
+		}
+		</Picker>
   </View>
 )
 
@@ -42,24 +43,24 @@ const TypeLot = ({
       /> */}
 
 const css = StyleSheet.create({
-  selectOption: {
-    // backgroundColor: 'red',
-    padding: 0
-  },
-  txt: {
-    fontSize: 13,
-    marginRight: 10,
-    color: '#c2c4ca'
-  },
-  container: {
-    // flexDirection: 'row', 
-    // alignItems: 'center'
-  },
-  ctTypeLOT: {
-    // borderWidth:  1,
-    padding: 10,
-    // flex: 1
-  },
+	selectOption: {
+		// backgroundColor: 'red',
+		padding: 0
+	},
+	txt: {
+		fontSize: 13,
+		marginRight: 10,
+		color: '#c2c4ca'
+	},
+	container: {
+		// flexDirection: 'row', 
+		// alignItems: 'center'
+	},
+	ctTypeLOT: {
+		// borderWidth:  1,
+		padding: 10,
+		// flex: 1
+	},
 })
 
 export default TypeLot;

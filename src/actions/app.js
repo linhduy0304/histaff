@@ -1,11 +1,34 @@
 
 import {
     PERIOD_SUCCESS,
-    APP_TYPE_LEAVE_SUCCESS
+    APP_TYPE_LEAVE_SUCCESS,
+    APP_TYPE_OT_SUCCESS
 } from "../config/types";
 import SimpleToast from 'react-native-simple-toast';
 
 const App = require('../services/App');
+
+//getTypeOt
+export const getTypeOtSuccess = data => {
+    return {
+        type: APP_TYPE_OT_SUCCESS,
+        data
+    }
+}
+export const getTypeOt = () => {
+    return dispatch => {
+        return App.getTypeOt().then(res => {
+            console.log(res)
+            if(res) {
+                dispatch(getTypeOtSuccess(res))
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+            }
+        })
+        .catch((error) => {
+        });
+    };
+}
 
 // getTypeLeave
 export const getTypeLeaveSuccess = data => {

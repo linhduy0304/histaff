@@ -6,15 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Picker, 
-  Dimensions,
-  FlatList,
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    Picker, 
+    Dimensions,
+    FlatList,
 } from 'react-native';
 
 import Nav from '../../components/Nav';
@@ -28,31 +28,31 @@ import {DMVS} from '../../config/System'
 import Button from '../../components/Button';
 
 export default class DKN extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'RVS',
-      reason: '',
-      arrFilter: [0, 1, 2, 3],
-      time: '',
-      data: [
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        },
-        {
-          time: '15-06-2018'
-        }
-      ],
-    }
+    constructor(props) {
+      super(props);
+      this.state = {
+        value: 'RVS',
+        reason: '',
+        arrFilter: [0, 1, 2, 3],
+        time: '',
+        data: [
+          {
+            time: '15-06-2018'
+          },
+          {
+            time: '15-06-2018'
+          },
+          {
+            time: '15-06-2018'
+          },
+          {
+            time: '15-06-2018'
+          },
+          {
+            time: '15-06-2018'
+          }
+        ],
+      }
   }
 
   renderItem(data) {

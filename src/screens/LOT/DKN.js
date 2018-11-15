@@ -6,15 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Picker, 
-  Dimensions,
-  FlatList,
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    Picker, 
+    Keyboard,
+    FlatList,
 } from 'react-native';
 
 import Nav from '../../components/Nav';
@@ -24,16 +24,17 @@ import TypeLot from '../../components/LOT/TypeLot';
 import InputReason from '../../components/LOT/InputReason';
 import DatePicker from 'react-native-datepicker';
 import ItemFilter from '../../components/LOT/ItemFilter';
-import {LOT, screen} from '../../config/System'
+import {LOT, screen, family_value, family_label} from '../../config/System'
 import Button from '../../components/Button';
 import NoData from '../../components/NoData';
 import LoadingFull from '../../components/LoadingFull';
+import SimpleToast from 'react-native-simple-toast';
 
 class DKN extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.app.typeLeave[0].CODE,
+            value: this.props.app.typeLeave[0].ID,
             reason: '',
             arrFilter: [0, 1, 2, 3],
             date: '',
@@ -57,31 +58,32 @@ class DKN extends Component {
 
     renderItem(data) {
         return (
-        <View style={styles.ctItem}>
-            <Text>{data.time}</Text> 
-            <Text>{data.time}</Text>  
-            <Text>{data.time}</Text> 
-            <Text>{data.time}</Text> 
-            <Text>{data.time}</Text> 
-
-        </View>
+            <View style={{padding: 2}}>
+                 <View style={styles.ctItem}>
+                    <Text style={styles.txtStatus}>Người đăng ký:  <Text style={styles.txtValue}>{data.USER_NAME}</Text></Text>
+                    <Text style={styles.txtStatus}>Thời gian:  <Text style={styles.txtValue}>{convertDateTime(data.FROM_DATE)} - {convertDateTime(data.TO_DATE)}</Text></Text>
+                    <Text style={styles.txtStatus}>Lý do:  <Text style={styles.txtValue}>{data.REASON}</Text></Text>
+                    <Text style={styles.txtStatus}>Loại nghỉ:  <Text style={styles.txtValue}>{data.ID_SIGN}</Text></Text>
+                </View>
+            </View>
+           
         )
     }
 
     filter(value) {
         var a = this.state.arrFilter;
         for(var i = 0; i <= a.length; i++) {
-        if(a[i] === value) {
-            a.splice(i, 1);
-            this.setState({
-            arrFilter: a
-            });
-            return;
-        }
+            if(a[i] === value) {
+                a.splice(i, 1);
+                this.setState({
+                arrFilter: a
+                });
+                return;
+            }
         }
         a.unshift(value);
         this.setState({
-        arrFilter: a
+            arrFilter: a
         })
     }
 
@@ -89,7 +91,27 @@ class DKN extends Component {
         this.props.getRegisterLeave(this.props.profile.user.EMPLOYEE_ID, this.state.arrFilter)
     }
 
-    renderHeader() {
+    register = () => {
+        Keyboard.dismiss();
+        const {reason, value, time_start, time_end} = this.state;
+        if(time_start === '' || time_end === '' || reason === '') {
+            SimpleToast.show('Các trường không được để trống!');
+            return;
+        }
+        const body = {
+            ID_EMPLOYEE: 265,
+            ID_SIGN: value,
+            FROM_DATE: time_start,
+            TO_DATE:time_end,
+            CREATED_BY: this.props.profile.user.USERNAME,
+            SVALUE: "LEAVE",
+            NVALUE: 2,
+            REASON: reason,
+        }
+        this.props.registerLeave(body);
+    }
+
+    renderHeader = () => {
         return (
         <View style={{backgroundColor: '#fff',}}>
             <View style={{padding: 15}}>
@@ -109,12 +131,12 @@ class DKN extends Component {
                         date={this.state.time_start}
                         mode="date"
                         placeholder="Từ ngày"
-                        format="DD-MM-YYYY"
+                        format="YYYY-MM-DD"
                         showIcon={false}
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
-                        minDate='01-01-1900'
-                        maxDate={'01-01-2200'}
+                        minDate='1900-01-01'
+                        maxDate={'2200-01-01'}
                         onDateChange={(date) => this.setState({time_start: date})}
                         customStyles={
                         {
@@ -133,12 +155,12 @@ class DKN extends Component {
                         date={this.state.time_end}
                         mode="date"
                         placeholder="Đến ngày"
-                        format="DD-MM-YYYY"
+                        format="YYYY-MM-DD"
                         showIcon={false}
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
-                        minDate='01-01-1900'
-                        maxDate={'01-01-2200'}
+                        minDate='1900-01-01'
+                        maxDate={'2200-01-01'}
                         onDateChange={(date) => this.setState({time_end: date})}
                         customStyles={
                         {
@@ -156,13 +178,11 @@ class DKN extends Component {
                         title = 'Gửi đăng ký nghỉ'
                         color = 'white'
                         marginTop = {15}
-                        onPress = {() => null}
+                        onPress = {this.register}
                         fontSize = {16}
                         fontWeight = '500'
                         backgroundColor = 'rgb(38, 114, 203)'
                     />
-                    
-                
             </View>
             <View style={{alignItems: 'center'}}>
                 <View style={styles.ctTitle}>
@@ -203,6 +223,7 @@ class DKN extends Component {
 	}
 
     render() {
+        const { data } = this.state
         return (
         <View style={css.container}>
             {
@@ -214,8 +235,8 @@ class DKN extends Component {
             <View style={styles.content}>
                 <View style={{flex: 1}}>
                     <FlatList 
-                        data={this.state.data}
-                        ListHeaderComponent = {() => this.renderHeader()}
+                        data={data}
+                        ListHeaderComponent = {this.renderHeader}
                         ListFooterComponent={this.renderFooter}
                         keyExtractor={(item, index) => index.toString()}
                         contentContainerStyle={{ paddingBottom: 15}}
@@ -229,36 +250,55 @@ class DKN extends Component {
 }
 
 const styles = StyleSheet.create({
-  ctDate: {
-    flexDirection: 'row',
-    // padding: 15,
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#c2c4ca'
-  },
-  ctItem: {
-    padding: 15,
-    margin: 15,
-    backgroundColor: '#fff',
-    borderRadius: 4,
-    marginBottom: 0
-  },
-  txtTitle: {
-    color: '#fff'
-  },
-  ctTitle: {
-    backgroundColor: '#D83601',
-    padding: 10,
-    paddingLeft: 15,
-    width: screen.width
-  },
-  content: {
-    flex: 1,
-  },
+    txtValue: {
+        fontSize: 14,
+        color: '#1f2a35',
+        fontFamily: family_value
+      },
+      txtStatus: {
+        color: '#c2c4ca',
+        // fontSize: 12,
+        fontFamily: family_label
+      },
+    ctDate: {
+        flexDirection: 'row',
+        // padding: 15,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#c2c4ca'
+    },
+    ctItem: {
+        padding: 15,
+        margin: 15,
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        marginBottom: 0,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 20
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
+        elevation: 5,
+    },
+    txtTitle: {
+        color: '#fff'
+    },
+    ctTitle: {
+        backgroundColor: '#D83601',
+        padding: 10,
+        paddingLeft: 15,
+        width: screen.width
+    },
+    content: {
+        flex: 1,
+    },
 });
 
 import { connect } from 'react-redux';
-import { getRegisterLeave } from '../../actions/lot';
+import { getRegisterLeave, registerLeave } from '../../actions/lot';
+import { convertDateTime } from '../../components/Functions';
 const mapStateToProps = (state) => {
     return {
         app: state.app,
@@ -269,6 +309,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getRegisterLeave: (empId, body) => dispatch(getRegisterLeave(empId, body)),
+        registerLeave: (body) => dispatch(registerLeave(body)),
     }
 }
 

@@ -1,20 +1,40 @@
 
 import {
     LOT_REGISTER_LEAVE_SUCCESS,
-    LOT_LOADING
+    LOT_LOADING,
+    LOT_GET_REGISTER_LEAVE_SUCCESS,
+    LOT_GET_REGISTER_OT_SUCCESS,
+    LOT_REGISTER_OT_SUCCESS
 } from '../config/types';
   
 const initialState = {
     loading: null,
-    leaves: null
+    leaves: null,
+    ots: null,
 }
   
 export default function lot (state = initialState, action) {
     switch(action.type) {
-        case LOT_REGISTER_LEAVE_SUCCESS:
+        case LOT_GET_REGISTER_OT_SUCCESS:
+            return {
+                ...state,
+                ots: action.data
+            }
+        case LOT_REGISTER_OT_SUCCESS:
+            return {
+                ...state,
+                // leaves: action.data
+            }
+
+        case LOT_GET_REGISTER_LEAVE_SUCCESS:
             return {
                 ...state,
                 leaves: action.data
+            }
+        case LOT_REGISTER_LEAVE_SUCCESS:
+            return {
+                ...state,
+                // leaves: action.data
             }
         case LOT_LOADING:
             return {
