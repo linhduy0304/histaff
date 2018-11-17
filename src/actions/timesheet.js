@@ -21,7 +21,6 @@ export const getPeriod = year => {
     return dispatch => {
         dispatch(loading(true))
         return App.getPeriod(year).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getPeriodSuccess(res));
                 dispatch(loading(null));
@@ -51,11 +50,9 @@ export const getTimeSheetSuccess = data => {
     }
 }
 export const getTimeSheet = (periodId, empId) => {
-    console.log(periodId, empId)
     return dispatch => {
         dispatch(loading(true))
         return TimeSheet.getTimeSheet(periodId, empId).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getTimeSheetSuccess(res));
                 dispatch(loading(null));

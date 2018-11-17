@@ -9,4 +9,5 @@ module.exports = {
   assessment: `${URL}assessment`,
   timesheet: `${URL}timesheet`,
   attendance: `${URL}attendance`,
+  direct: `${URL}direct`,
 }

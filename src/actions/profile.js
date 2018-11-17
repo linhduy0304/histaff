@@ -20,7 +20,6 @@ export const getTrainInCompanySuccess = data => {
     }
 }
 export const getTrainInCompany = (id, load) => {
-    console.log(id, load)
     return dispatch => {
         dispatch(loading(true))
         return Profile.getTrainInCompany(id, load).then(res => {
@@ -58,7 +57,6 @@ export const getFamily = (id) => {
         dispatch(loading(true))
         return Profile.getFamily(id).then(res => {
             if(res) {
-                console.log(res)
                 dispatch(profileSuccess(res));
                 dispatch(loading(null));
             }else {
@@ -89,7 +87,6 @@ export const getProfile = (id) => {
     return dispatch => {
         dispatch(loading(true))
         return Profile.getProfile(id).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(profileSuccess(res));
                 dispatch(loading(null));

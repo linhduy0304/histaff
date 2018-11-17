@@ -56,203 +56,239 @@ class Menu extends Component {
     );
   }
 
-  pickChild(data) {
-    switch(data.value) {
-      case 'HSNS':
-        // this.setState({
-        //   pickChild: 'TTCN-1'
-        // })
-        Actions.hsns();
-        return;
-      case 'QHNT':
-        Actions.qhnt();
-        return;
-      case 'QTCTTD':
-        Actions.qtcttd();
-        return;
-      case 'QTCTHT':
-        Actions.qtctht();
-        return;
-      case 'QTDTTCT':
-        Actions.qtdttct();
-        return;
-      case 'QTDTNCT':
-        Actions.qtdtnct();
-        return;
-      case 'QTHDLD':
-        Actions.qthdld();
-        return;
-      case 'QTTDLPC':
-        Actions.qttdlpc();
-        return;
-      case 'QTKT':
-        Actions.qtkt();
-        return;
-      case 'QTKL':
-        Actions.qtkl();
-        return;
-      case 'QTDG':
-        Actions.qtdg();
-        return;
-      case 'QTNL':
-        Actions.qtnl();
-        return;
+	pickChild(data) {
+		switch(data.value) {
+			case 'HSNS':
+				Actions.hsns();
+				return;
+			case 'QHNT':
+				Actions.qhnt();
+				return;
+			case 'QTCTTD':
+				Actions.qtcttd();
+				return;
+			case 'QTCTHT':
+				Actions.qtctht();
+				return;
+			case 'QTDTTCT':
+				Actions.qtdttct();
+				return;
+			case 'QTDTNCT':
+				Actions.qtdtnct();
+				return;
+			case 'QTHDLD':
+				Actions.qthdld();
+				return;
+			case 'QTTDLPC':
+				Actions.qttdlpc();
+				return;
+			case 'QTKT':
+				Actions.qtkt();
+				return;
+			case 'QTKL':
+				Actions.qtkl();
+				return;
+			case 'QTDG':
+				Actions.qtdg();
+				return;
+			case 'QTNL':
+				Actions.qtnl();
+				return;
 
-      //Đánh giá
-      case 'TDG':
-        Actions.tdg();
-        return;
-      case 'KPINV':
-        Actions.kpinv();
-        return;
-      case 'KPICN':
-        Actions.kpicn();
-        return;
-      default: 
-        return;
-    }
-  }
+			//CBNV
+			case 'CBNV_TTHS':
+			console.log('aaa')
+				Actions.cbnv_hsns();
+				return;
+			case 'CBNV-QHNT':
+				Actions.qhnt();
+				return;
+			case 'CBNV-QTCTTD':
+				Actions.qtcttd();
+				return;
+			case 'CBNV-QTCTHT':
+				Actions.qtctht();
+				return;
+			case 'CBNV-QTDTTCT':
+				Actions.qtdttct();
+				return;
+			case 'CBNV-QTDTNCT':
+				Actions.qtdtnct();
+				return;
+			case 'CBNV-QTHDLD':
+				Actions.qthdld();
+				return;
+			case 'CBNV-QTTDLPC':
+				Actions.qttdlpc();
+				return;
+			case 'CBNV-QTKT':
+				Actions.qtkt();
+				return;
+			case 'CBNV-QTKL':
+				Actions.qtkl();
+				return;
+			case 'CBNV-QTDG':
+				Actions.qtdg();
+				return;
+			case 'CBNV-QTNL':
+				Actions.qtnl();
+				return;
 
-  pickCategory(data) {
-    switch(data.value) {
-      case 'TTCN':
-        var a = [];
-        if(this.state.showChild.indexOf('TTCN') == -1) {
-          a.unshift('TTCN')
-        }
-        this.setState({
-          showChild: a
-        })
-        return;
-      case 'TTCBNV':
-        var a = [];
-        if(this.state.showChild.indexOf('TTCBNV') == -1) {
-          a.unshift('TTCBNV')
-        }
-        this.setState({
-          showChild: a
-        })
-        return;
-      case 'BC':
-        this.setState({
-          showChild: []
-        })
-        Actions.bc()
-        return;
-      case 'PL':
-        this.setState({
-          showChild: []
-        })
-        Actions.pl()
-        return;
-      case 'DG':
-        var a = [];
-        if(this.state.showChild.indexOf('DG') == -1) {
-          a.unshift('DG')
-        }
-        this.setState({
-          showChild: a
-        })
-        return;
-      case 'TD':
-        var a = [];
-        if(this.state.showChild.indexOf('TD') == -1) {
-          a.unshift('TD')
-        }
-        this.setState({
-          showChild: a
-        })
-        return;
-      case 'DT':
-        var a = [];
-        if(this.state.showChild.indexOf('DT') == -1) {
-          a.unshift('DT')
-        }
-        this.setState({
-          showChild: a
-        })
-        return;
-      case 'HDSD':
-        this.setState({
-          showChild: []
-        })
-        alert('Hướng dẫn sử dụng')
-        return;
-      default: 
-        this.setState({
-          showChild: []
-        })
-        alert('Support')
-        return;
-    }
-  }
+			//Đánh giá
+			case 'TDG':
+				Actions.tdg();
+				return;
+			case 'KPINV':
+				Actions.kpinv();
+				return;
+			case 'KPICN':
+				Actions.kpicn();
+				return;
+			default: 
+				return;
+			}
+	}
 
-  delete() {
-    new Store().deleteSessionToken(Const.USER);
-    Actions.login({type: 'reset'});
-  }
+	pickCategory(data) {
+		switch(data.value) {
+			case 'TTCN':
+				var a = [];
+				if(this.state.showChild.indexOf('TTCN') == -1) {
+				a.unshift('TTCN')
+				}
+				this.setState({
+					showChild: a
+				})
+				return;
+			case 'TTCBNV':
+				var a = [];
+				if(this.state.showChild.indexOf('TTCBNV') == -1) {
+				a.unshift('TTCBNV')
+				}
+				this.setState({
+					showChild: a
+				})
+				return;
+			case 'BC':
+				this.setState({
+				showChild: []
+				})
+				Actions.bc()
+				return;
+				case 'PL':
+				this.setState({
+				showChild: []
+				})
+				Actions.pl()
+				return;
+			case 'DG':
+				var a = [];
+				if(this.state.showChild.indexOf('DG') == -1) {
+				a.unshift('DG')
+				}
+				this.setState({
+				showChild: a
+				})
+				return;
+			case 'TD':
+				var a = [];
+				if(this.state.showChild.indexOf('TD') == -1) {
+				a.unshift('TD')
+				}
+				this.setState({
+				showChild: a
+				})
+				return;
+			case 'DT':	
+				var a = [];
+				if(this.state.showChild.indexOf('DT') == -1) {
+				a.unshift('DT')
+				}
+				this.setState({
+				showChild: a
+				})
+				return;
+			case 'HDSD':
+				this.setState({
+				showChild: []
+				})
+				alert('Hướng dẫn sử dụng')
+				return;
+			default: 
+				this.setState({
+				showChild: []
+				})
+				alert('Support')
+				return;
+		}
+	}
 
-  logout() {
-    Alert.alert(
-      'Thông báo',
-      'Bạn muốn thoát ứng dụng?',
-      [
-        {text: 'Thoát', onPress: () => this.delete(), style: 'cancel'},
-        {text: 'Huỷ bỏ', onPress: () => null}
-      ]
-    )
-  }
+	delete() {
+		new Store().deleteSessionToken(Const.USER);
+		Actions.login({type: 'reset'});
+	}
 
-  render() {
-    return (
-      <ScrollView style={{backgroundColor: '#303030'}}>
-        <View style={{marginTop}}>
-          <HeaderMenu logout={() => this.logout()} data={this.props.profile.user}/>
-          {
-            menu.map((item, index) => {
-              return this.renderMenu(item, index)
-            })
-          }
-        </View>
-      </ScrollView>
-    )
-  }
+	logout() {
+		Alert.alert(
+		'Thông báo',
+		'Bạn muốn thoát ứng dụng?',
+		[
+			{text: 'Thoát', onPress: () => this.delete(), style: 'cancel'},
+			{text: 'Huỷ bỏ', onPress: () => null}
+		]
+		)
+	}
+
+	render () {
+		return (
+		<ScrollView style={{backgroundColor: '#303030'}}>
+			<View style={{marginTop}}>
+			<HeaderMenu logout={() => this.logout()} data={this.props.profile.user}/>
+			{
+				menu.map((item, index) => {
+				return this.renderMenu(item, index)
+				})
+			}
+			</View>
+		</ScrollView>
+		)
+	}
 }
 
 const styles = StyleSheet.create({
-  ctTitle: {
-    flexDirection: 'row',
-    // backgroundColor: '#eeeeee',
-    borderBottomWidth: 1,
-    padding: 15,
-    paddingTop: 13,
-    paddingBottom: 13,
-    borderBottomColor: '#313131'
-  },
-  ctContent: {
-    flexDirection: 'row',
-    backgroundColor: '#303030',
-    marginLeft: 30,
-    borderBottomWidth: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    borderBottomColor: '#313131'
-  },
+	ctTitle: {
+		flexDirection: 'row',
+		// backgroundColor: '#eeeeee',
+		borderBottomWidth: 1,
+		padding: 15,
+		paddingTop: 13,
+		paddingBottom: 13,
+		borderBottomColor: '#313131'
+	},
+	ctContent: {
+		flexDirection: 'row',
+		backgroundColor: '#303030',
+		marginLeft: 30,
+		borderBottomWidth: 1,
+		paddingTop: 10,
+		paddingBottom: 10,
+		// justifyContent: 'center',
+		// alignItems: 'center',
+		borderBottomColor: '#313131'
+	},
 });
 
 import {connect} from 'react-redux';
 import {login} from '../../actions/auth';
 
 const mapStateToProps = (state) => {
-  return {
-    profile: state.profile
-  }
+	return {
+		profile: state.profile
+	}
 }
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+	return {
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)

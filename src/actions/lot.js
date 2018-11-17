@@ -4,11 +4,64 @@ import {
     LOT_LOADING,
     LOT_GET_REGISTER_LEAVE_SUCCESS,
     LOT_GET_REGISTER_OT_SUCCESS,
-    LOT_REGISTER_OT_SUCCESS
+    LOT_REGISTER_OT_SUCCESS,
+    LOT_GET_REGISTER_LATE_EARLY_SUCCESS
 } from "../config/types";
 import SimpleToast from 'react-native-simple-toast';
 
 const Lot = require('../services/Lot');
+
+// registerLateEarly
+export const registerLateEarlySuccess = data => {
+    return {
+        type: LOT_REGISTER_OT_SUCCESS,
+        data
+    }
+}
+export const registerLateEarly = (body) => {
+    return dispatch => {
+        dispatch(loading(true))
+        return Lot.registerLateEarly(body).then(res => {
+            console.log('aaaa')
+            console.log(res)
+            if(res) {
+                SimpleToast.show('Đăng ký thành công')
+                dispatch(registerLateEarlySuccess(res));
+                dispatch(loading(null));
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(loading(null));
+            }
+        })
+        .catch((error) => {
+          dispatch(loading(null))
+        });
+    };
+}
+// getRegisterLateEarly
+export const getRegisterLateEarlySuccess = data => {
+    return {
+        type: LOT_GET_REGISTER_LATE_EARLY_SUCCESS,
+        data
+    }
+}
+export const getRegisterLateEarly = (empId, body) => {
+    return dispatch => {
+        dispatch(loading(true))
+        return Lot.getRegisterLateEarly(empId, body).then(res => {
+            if(res) {
+                dispatch(getRegisterLateEarlySuccess(res));
+                dispatch(loading(null));
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(loading(null));
+            }
+        })
+        .catch((error) => {
+          dispatch(loading(null))
+        });
+    };
+}
 
 // registerOt
 export const registerOtSuccess = data => {
@@ -21,7 +74,6 @@ export const registerOt = (body) => {
     return dispatch => {
         dispatch(loading(true))
         return Lot.registerOt(body).then(res => {
-            console.log(res)
             if(res) {
                 SimpleToast.show('Đăng ký làm thêm thành công')
                 dispatch(registerOtSuccess(res));
@@ -45,11 +97,9 @@ export const getRegisterOtSuccess = data => {
     }
 }
 export const getRegisterOt = (empId, body) => {
-    console.log(body)
     return dispatch => {
         dispatch(loading(true))
         return Lot.getRegisterOt(empId, body).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getRegisterOtSuccess(res));
                 dispatch(loading(null));

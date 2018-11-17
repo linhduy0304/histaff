@@ -20,7 +20,6 @@ export const getPeriod = year => {
     return dispatch => {
         dispatch(loading(true))
         return App.getPeriod(year).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getPeriodSuccess(res));
                 dispatch(loading(null));
@@ -54,7 +53,6 @@ export const getPayroll = (payrollId, empId) => {
     return dispatch => {
         dispatch(loading(true))
         return Payroll.getPayroll(payrollId, empId).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getPayrollSuccess(res));
                 dispatch(loading(null));

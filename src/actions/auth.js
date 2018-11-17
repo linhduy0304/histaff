@@ -26,7 +26,6 @@ export const login = (body) => {
     return dispatch => {
         dispatch(loading(true))
         return Auth.login(body).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getDataUser(res))
                 new Store().storeSession(Const.IS_LOGIN, true);

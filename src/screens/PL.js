@@ -69,7 +69,6 @@ class PL extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const {data, year, periods, period} = this.state
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>

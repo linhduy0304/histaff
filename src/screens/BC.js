@@ -58,7 +58,6 @@ class BC extends Component {
 	}
 
 	setPeriod = periodId => {
-		console.log(periodId)
 		this.setState({periodId});
 	}
 

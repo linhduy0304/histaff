@@ -47,7 +47,6 @@ class HSNS extends Component {
     
     render() {
         const { data } = this.state;
-        console.log(data)
         return (
         <View style={css.container}>
             {

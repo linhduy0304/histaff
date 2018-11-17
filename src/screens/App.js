@@ -16,6 +16,7 @@ class App extends Component {
     componentWillMount = () => {
         this.props.getTypeOt();
         this.props.getTypeLeave();
+        this.props.getTypeLateEarly();
         this.props.getPeriod(this.state.year)
         new Store().getSession(Const.USER).then(user => {
             console.log(user)
@@ -38,7 +39,7 @@ class App extends Component {
 
 import { connect } from 'react-redux';
 import { getDataUser } from '../actions/auth';
-import { getPeriod, getTypeLeave, getTypeOt } from '../actions/app';
+import { getPeriod, getTypeLeave, getTypeOt, getTypeLateEarly } from '../actions/app';
 import { getYear } from '../components/Functions';
 
 const mapStateToProps = (state) => {
@@ -52,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
         getPeriod: (year) => dispatch(getPeriod(year)),
         getTypeLeave: () => dispatch(getTypeLeave()),
         getTypeOt: () => dispatch(getTypeOt()),
+        getTypeLateEarly: () => dispatch(getTypeLateEarly()),
     }
 }
 

@@ -2,6 +2,11 @@
 let HTTP = require('./HTTP');
 let URL = require('./URL');
 
+//getTypeLateEarly
+export const getTypeLateEarly = () => {
+	return HTTP.get(`${URL.attendance}/dmvs-type`)
+}
+
 //getTypeOt
 export const getTypeOt = () => {
 	return HTTP.get(`${URL.attendance}/ot-effort`)

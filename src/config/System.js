@@ -392,51 +392,51 @@ export const Month = ([
       child: [
         {
           title: 'Thông tin hồ sơ',
-          value: 'HSNS'
+          value: 'CBNV_TTHS'
         },
         {
           title: 'Nhân thân',
-          value: 'QHNT'
+          value: 'CBNV-QHNT'
         },
         {
           title: 'Quá trình công tác trước đây',
-          value: 'QTCTTD'
+          value: 'CBNV-QTCTTD'
         },
         {
           title: 'Quá trình công tác hiện tại',
-          value: 'QTCTHT'
+          value: 'CBNV-QTCTHT'
         },
         {
           title: 'Quá trình đào tạo trong công ty',
-          value: 'QTDTTCT'
+          value: 'CBNV-QTDTTCT'
         },
         {
           title: 'Quá trinh đào tạo ngoài công ty',
-          value: 'QTDTNCT'
+          value: 'CBNV-QTDTNCT'
         },
         {
           title: 'Quá trình hợp đồng lao động',
-          value: 'QTHDLD'
+          value: 'CBNV-QTHDLD'
         },
         {
           title: 'Quá trình thay đổi lương - phụ cấp',
-          value: 'QTTDLPC'
+          value: 'CBNV-QTTDLPC'
         },
         {
           title: 'Quá trình khen thưởng',
-          value: 'QTKT'
+          value: 'CBNV-QTKT'
         },
         {
           title: 'Quá trình kỷ luật',
-          value: 'QTKL'
+          value: 'CBNV-QTKL'
         },
         {
           title: 'Quá trinh đánh giá',
-          value: 'QTDG'
+          value: 'CBNV-QTDG'
         },
         {
           title: 'Quá trình năng lực',
-          value: 'QTNL'
+          value: 'CBNV-QTNL'
         },
       ]
     },

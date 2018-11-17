@@ -2,6 +2,16 @@
 let HTTP = require('./HTTP');
 let URL = require('./URL');
 
+// registerLateEarly
+export const registerLateEarly = (body) => {
+	return HTTP.post(`${URL.attendance}/dmvs-register`, body)
+}
+
+// getRegisterLateEarly
+export const getRegisterLateEarly = (empId, body) => {
+	return HTTP.post(`${URL.attendance}/dmvs-appoiment?employeeId=${empId}`, body)
+}
+
 //registerOt
 export const registerOt = (body) => {
 	return HTTP.post(`${URL.attendance}/ot-register`, body)

@@ -25,6 +25,9 @@ import QTKT from './screens/TTCN/QTKT';
 import QTKL from './screens/TTCN/QTKL';
 import QTDG from './screens/TTCN/QTDG';
 import QTNL from './screens/TTCN/QTNL';
+
+import CBNV_HSNS from './screens/CBNV/CBNV_HSNS';
+
 import BC from './screens/BC';
 import PL from './screens/PL';
 import TDG from './screens/DG/TDG';
@@ -57,6 +60,19 @@ const Main = () => (
 			<Scene key="qtkl" component={QTKL}/>
 			<Scene key="qtdg" component={QTDG}/>
 			<Scene key="qtnl" component={QTNL}/>
+
+			<Scene key="cbnv_hsns" component={CBNV_HSNS}/>
+			{/* <Scene key="qhnt" component={CBNV-QHNT}/>
+			<Scene key="qtcttd" component={CBNV-QTCTTD}/>
+			<Scene key="qtctht" component={CBNV-QTCTHT}/>
+			<Scene key="qtdttct" component={CBNV-QTDTTCT}/>
+			<Scene key="qtdtnct" component={CBNV-QTDTNCT}/>
+			<Scene key="qthdld" component={CBNV-QTHDLD}/>
+			<Scene key="qttdlpc" component={CBNV-QTTDLPC}/>
+			<Scene key="qtkt" component={CBNV-QTKT}/>
+			<Scene key="qtkl" component={CBNV-QTKL}/>
+			<Scene key="qtdg" component={CBNV-QTDG}/>
+			<Scene key="qtnl" component={CBNV-QTNL}/> */}
 
 			<Scene key="bc" component={BC}/>
 			<Scene key="pl" component={PL}/>

@@ -26,7 +26,6 @@ export const getAssessment = (id, load) => {
     return dispatch => {
         dispatch(loading(true))
         return Assessment.getAssessment(id, load).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getAssessmentSuccess(res));
                 dispatch(loading(null));

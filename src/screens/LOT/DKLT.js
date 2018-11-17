@@ -108,7 +108,6 @@ class DKLT extends Component {
             CREATED_BY: this.props.profile.user.USERNAME,
             REASON: reason,
 		}
-		console.log(body)
         this.props.registerOt(body);
     }
 
