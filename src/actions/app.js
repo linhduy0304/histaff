@@ -42,6 +42,7 @@ export const getTypeOtSuccess = data => {
 export const getTypeOt = () => {
     return dispatch => {
         return App.getTypeOt().then(res => {
+            console.log(res)
             if(res) {
                 dispatch(getTypeOtSuccess(res))
             }else {
@@ -65,6 +66,7 @@ export const getTypeLeaveSuccess = data => {
 export const getTypeLeave = () => {
     return dispatch => {
         return App.getTypeLeave().then(res => {
+            console.log(res)
             if(res) {
                 dispatch(getTypeLeaveSuccess(res))
             }else {
@@ -88,6 +90,7 @@ export const getPeriodSuccess = data => {
 export const getPeriod = year => {
     return dispatch => {
         return App.getPeriod(year).then(res => {
+            console.log(res)
             if(res) {
                 dispatch(getPeriodSuccess(res))
             }else {

@@ -29,5 +29,6 @@ export const registerLeave = (body) => {
 
 //getRegisterLeave
 export const getRegisterLeave = (empId, body) => {
+	console.log(`${URL.attendance}/register-appoiment?employeeId=${empId}`)
   	return HTTP.post(`${URL.attendance}/register-appoiment?employeeId=${empId}`, body)
 }

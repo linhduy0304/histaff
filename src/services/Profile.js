@@ -12,7 +12,7 @@ export const getTrainInCompany = (id, load) => {
 		case 'judge': //danh gia
 			return HTTP.get(`${URL.api}/competencyass/get/${id}`)
 		case 'talent': //nang luc
-			return HTTP.get(`${URL.api}/competencyperiodlist/get/${id}`)
+			return HTTP.get(`${URL.profile}/portalempdtlviewkpi/${id}`)
 		case 'discipline':
 			return HTTP.get(`${URL.profile}/discipline?employeeId=${id}`)
 		//khen thuonwgr

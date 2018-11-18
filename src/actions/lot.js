@@ -151,16 +151,19 @@ export const getRegisterLeave = (empId, body) => {
     return dispatch => {
         dispatch(loading(true))
         return Lot.getRegisterLeave(empId, body).then(res => {
+            console.log(res)
             if(res) {
                 dispatch(getRegisterLeaveSuccess(res));
                 dispatch(loading(null));
             }else {
+                dispatch(getRegisterLeaveSuccess([]))
                 SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
                 dispatch(loading(null));
             }
         })
         .catch((error) => {
-          dispatch(loading(null))
+            dispatch(getRegisterLeaveSuccess([]))
+            dispatch(loading(null))
         });
     };
 }

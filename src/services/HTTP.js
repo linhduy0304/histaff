@@ -21,9 +21,7 @@ export function get(url) {
       	return res
     })
     .catch(error => {
-		return {
-			code: 500
-		}
+		return null
     })
   }
 
@@ -45,8 +43,6 @@ export function post(url, body) {
         return res
     })
     .catch(error => {
-        return {
-        code: 500
-        }
+        return null
     })
 }
