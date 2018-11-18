@@ -18,7 +18,7 @@ const ItemQTHDLD = ({
     <Text style={css.txtStatus}>Số hợp đồng:  <Text style={css.txtValue}>{data.CONTRACT_NO}</Text></Text>
     <Text style={css.txtStatus}>Thời gian:  <Text style={css.txtValue}>{convertDateTime(data.CREATED_DATE)} - {convertDateTime(data.EXPIRE_DATE)}</Text></Text>
     <Text style={css.txtStatus}>Người ký:  <Text style={css.txtValue}>{data.SIGNER_NAME}</Text></Text>
-    <Text style={css.txtStatus}>Ngày ký:  <Text style={css.txtValue}>{data.SIGN_DATE}</Text></Text>
+    <Text style={css.txtStatus}>Ngày ký:  <Text style={css.txtValue}>{convertDateTime(data.SIGN_DATE)}</Text></Text>
     <Text style={css.txtStatus}>Chức danh người ký:  <Text style={css.txtValue}>{data.SIGNER_TITLE}</Text></Text>
   </View>
 )

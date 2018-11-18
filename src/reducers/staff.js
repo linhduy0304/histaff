@@ -12,7 +12,6 @@ const initialState = {
 export default function profile (state = initialState, action) {
     switch(action.type) {
         case STAFF_SUCCESS:
-        console.log(action)
             return {
                 ...state,
                 staffs: action.data

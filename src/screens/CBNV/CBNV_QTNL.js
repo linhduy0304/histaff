@@ -20,20 +20,20 @@ import {
 import Nav from '../../components/Nav';
 import css from '../../config/css';
 import { Actions } from '../../../node_modules/react-native-router-flux';
-import ItemQTHDLD from '../../components/TTCN/ItemQTHDLD';
+import ItemQTNL from '../../components/TTCN/ItemQTNL';
 
 const window = Dimensions.get('window');
 
-class QTHDLD extends Component {
+class CBNV_QTNL extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			data: []
 		}
 	}
-
+	  
 	componentWillMount = () => {
-		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'contract')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'talent')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -58,13 +58,13 @@ class QTHDLD extends Component {
                     <LoadingFull/>
                 : null
             }
-			<Nav label='Qúa trình hợp đồng lao động'/>
+			<Nav label='Qúa trình năng lực'/>
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
 				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
-				renderItem = {data =>  <ItemQTHDLD data = {data.item}/>}
+				renderItem = {data =>  <ItemQTNL data = {data.item}/>}
 			/>
 		</View>
 		);
@@ -94,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QTHDLD)
+export default connect(mapStateToProps, mapDispatchToProps)(CBNV_QTNL)

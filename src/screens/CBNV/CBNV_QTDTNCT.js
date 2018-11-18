@@ -22,7 +22,7 @@ import { Actions } from 'react-native-router-flux';
 import ItemQTDTNCT from '../../components/TTCN/ItemQTDTNCT';
 import Nav from '../../components/Nav';
 
-class QTDTNCT extends Component {
+class CBNV_QTDTNCT extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,19 +31,19 @@ class QTDTNCT extends Component {
     }
 
   	componentWillMount = () => {
-		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'train-out')
+		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'train_out')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.profile.trainCompany && nextProps.profile.trainCompany !== this.props.profile.trainCompany) {
-			this.setState({
-				data: nextProps.profile.trainCompany
-			})
-		}
+		if(nextProps.staff.staffs && nextProps.staff.staffs !== this.props.staff.staffs) {
+            this.setState({
+                data: nextProps.staff.staffs
+            })
+        }
 	};
 
 	renderFooter = () => {
-		if(this.state.data.length === 0 && !this.props.profile.loading) {
+		if(this.state.data.length === 0 && !this.props.staff.loading) {
 		  return <NoData label='Không có dữ liệu'/>
 		}else return null
 	}
@@ -52,7 +52,7 @@ class QTDTNCT extends Component {
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
 			{
-                this.props.profile.loading ?
+                this.props.staff.loading ?
                     <LoadingFull/>
                 : null
             }
@@ -79,18 +79,19 @@ const styles = StyleSheet.create({
 });
 
 import { connect } from 'react-redux';
-import { getTrainInCompany } from '../../actions/profile';
+import { getStaff } from '../../actions/staff';
 import NoData from '../../components/NoData';
 import LoadingFull from '../../components/LoadingFull';
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: state.profile,
+		staff: state.staff,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+		getStaff: (id, load) => dispatch(getStaff(id, load)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QTDTNCT)
+export default connect(mapStateToProps, mapDispatchToProps)(CBNV_QTDTNCT)

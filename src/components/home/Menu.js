@@ -101,37 +101,37 @@ class Menu extends Component {
 				Actions.cbnv_hsns();
 				return;
 			case 'CBNV-QHNT':
-				Actions.qhnt();
+				Actions.cbnv_qhnt();
 				return;
 			case 'CBNV-QTCTTD':
-				Actions.qtcttd();
+				Actions.cbnv_qtcttd();
 				return;
 			case 'CBNV-QTCTHT':
-				Actions.qtctht();
+				Actions.cbnv_qtctht();
 				return;
 			case 'CBNV-QTDTTCT':
-				Actions.qtdttct();
+				Actions.cbnv_qtdttct();
 				return;
 			case 'CBNV-QTDTNCT':
-				Actions.qtdtnct();
+				Actions.cbnv_qtdtnct();
 				return;
 			case 'CBNV-QTHDLD':
-				Actions.qthdld();
+				Actions.cbnv_qthdld();
 				return;
 			case 'CBNV-QTTDLPC':
-				Actions.qttdlpc();
+				Actions.cbnv_qttdlpc();
 				return;
 			case 'CBNV-QTKT':
-				Actions.qtkt();
+				Actions.cbnv_qtkt();
 				return;
 			case 'CBNV-QTKL':
-				Actions.qtkl();
+				Actions.cbnv_qtkl();
 				return;
 			case 'CBNV-QTDG':
-				Actions.qtdg();
+				Actions.cbnv_qtdg();
 				return;
 			case 'CBNV-QTNL':
-				Actions.qtnl();
+				Actions.cbnv_qtnl();
 				return;
 
 			//Đánh giá

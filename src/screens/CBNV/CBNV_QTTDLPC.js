@@ -25,7 +25,7 @@ import LoadingFull from '../../components/LoadingFull';
 
 const window = Dimensions.get('window');
 
-class QTTDLPC extends Component {
+class CBNV_QTTDLPC extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -108,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QTTDLPC)
+export default connect(mapStateToProps, mapDispatchToProps)(CBNV_QTTDLPC)

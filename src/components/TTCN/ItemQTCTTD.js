@@ -35,7 +35,7 @@ const ItemQTCTTD = ({
     <Text style={css.txtStatus}>Thời gian: <Text style={css.txtValue}>{convertDateTime(data.JOIN_DATE)} - {convertDateTime(data.END_DATE)}</Text></Text>
     <Text style={css.txtStatus}>Lý do nghỉ: <Text style={css.txtValue}>{data.TER_REASON}</Text></Text>
     <Text style={css.txtStatus}>Trạng thái: <Text style={css.txtValue}>{data.STATUS}</Text></Text>
-    <Text style={css.txtStatus}>Lý do không phê duyệt: <Text style={css.txtValue}>{data.REASON_UNAPROVE}</Text></Text>
+    {/* <Text style={css.txtStatus}>Lý do không phê duyệt: <Text style={css.txtValue}>{data.REASON_UNAPROVE}</Text></Text> */}
   </View>
 )
 
