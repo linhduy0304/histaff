@@ -84,13 +84,13 @@ class Home extends Component {
         Actions.dkdmvs({title: data.title});;
         return;
       case 'PDN':
-        Actions.pdn({title: data.title});;
+        Actions.approveLeave({title: data.title});;
         return;
       case 'PDLT':
-        Actions.pdlt({title: data.title});;
+        Actions.approveOt({title: data.title});;
         return;
       default :
-        Actions.pddmvs({title: data.title});;
+        Actions.approveLateEarly({title: data.title});;
         return;
     }
   }

@@ -5,11 +5,61 @@ import {
     LOT_GET_REGISTER_LEAVE_SUCCESS,
     LOT_GET_REGISTER_OT_SUCCESS,
     LOT_REGISTER_OT_SUCCESS,
-    LOT_GET_REGISTER_LATE_EARLY_SUCCESS
+    LOT_GET_REGISTER_LATE_EARLY_SUCCESS,
+    LOT_GET_APPROVE_LEAVE_SUCCESS
 } from "../config/types";
 import SimpleToast from 'react-native-simple-toast';
 
 const Lot = require('../services/Lot');
+
+//approveLeave
+export const approveLeave = ( body, status, screen ) => {
+    console.log(status, screen)
+    return dispatch => {
+        dispatch(loading(true))
+        return Lot.approveLeave(body, status, screen).then(res => {
+            if(res) {
+                dispatch(loading(null));
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(loading(null));
+            }
+        })
+        .catch((error) => {
+            dispatch(loading(null))
+        });
+    };
+}
+
+//getApprove
+export const getApproveLeaveSuccess = (data, status) => {
+    return {
+        type: LOT_GET_APPROVE_LEAVE_SUCCESS,
+        status,
+        data
+    }
+}
+export const getApproveLeave = ( body, screen) => {
+    console.log(body, '--------'+screen)
+    return dispatch => {
+        dispatch(loading(true))
+        return Lot.getApproveLeave(body, screen).then(res => {
+            console.log(res)
+            if(res) {
+                dispatch(getApproveLeaveSuccess(res, body.status));
+                dispatch(loading(null));
+            }else {
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+                dispatch(getApproveSuccess([]));
+                dispatch(loading(null));
+            }
+        })
+        .catch((error) => {
+            dispatch(getApproveSuccess([]));
+            dispatch(loading(null))
+        });
+    };
+}
 
 // registerLateEarly
 export const registerLateEarlySuccess = data => {

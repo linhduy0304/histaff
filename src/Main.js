@@ -47,9 +47,9 @@ import KPINV from './screens/DG/KPINV';
 import DKN from './screens/LOT/DKN';
 import DKLT from './screens/LOT/DKLT';
 import DKDMVS from './screens/LOT/DKDMVS';
-import PDN from './screens/LOT/PDN';
-import PDLT from './screens/LOT/PDLT';
-import PDDMVS from './screens/LOT/PDDMVS';
+import ApproveLeave from './screens/ApproveLeave';
+import ApproveOt from './screens/ApproveOt';
+import ApproveLateEarly from './screens/ApproveLateEarly';
 
 const Main = () => (
   <Provider store = {store}>
@@ -95,9 +95,9 @@ const Main = () => (
 			<Scene key="dkn" component={DKN}/>
 			<Scene key="dklt" component={DKLT}/>
 			<Scene key="dkdmvs" component={DKDMVS}/>
-			<Scene key="pdn" component={PDN}/>
-			<Scene key="pdlt" component={PDLT}/>
-			<Scene key="pddmvs" component={PDDMVS}/>
+			<Scene key="approveLeave" component={ApproveLeave}/>
+			<Scene key="approveOt" component={ApproveOt}/>
+			<Scene key="approveLateEarly" component={ApproveLateEarly}/>
 		</Stack>
     </Router>
   </Provider>

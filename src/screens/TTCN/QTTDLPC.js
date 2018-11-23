@@ -29,20 +29,7 @@ class QTTDLPC extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		data: [
-			{
-			SQD: '33/2021',
-			NHL: '30/01/2018',
-			CD: 'Cán bộ kỹ thuật',
-			CNS: '11',
-			DV: 'BAN BQLDA',
-			LCB: '5,000,000',
-			LDH: '100',     
-			CPHT: '4,000,000',
-			TTN: '9,000,000'
-			},
-			
-		]
+		data: []
 		}
 	}
 

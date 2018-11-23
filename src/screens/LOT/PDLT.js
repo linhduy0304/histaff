@@ -181,12 +181,12 @@ class PDLT extends Component {
             />
           </View>
           <View style={{padding: 15, paddingTop: 0}}>
-            <TypeLot 
+            {/* <TypeLot 
               title={'Loại đăng ký'} 
               data={HSLT}
               value={this.state.value}
               onChange={(value) => this.setState({value})}
-            />
+            /> */}
             <TextInput 
               label='Nhân viên'
               value={this.state.employee}

@@ -237,24 +237,24 @@ export const Month = ([
   import {getYear} from '../components/Functions'
   export const Year = ([
     {
-      title: (getYear()-3).toString(),
-      value: (getYear()-3).toString(),
+      NAME_VN: (getYear()-3).toString(),
+      ID: (getYear()-3).toString(),
     },
     {
-      title: (getYear()-2).toString(),
-      value: (getYear()-2).toString(),
+      NAME_VN: (getYear()-2).toString(),
+      ID: (getYear()-2).toString(),
     },
     {
-      title: (getYear()-1).toString(),
-      value: (getYear()-1).toString(),
+      NAME_VN: (getYear()-1).toString(),
+      ID: (getYear()-1).toString(),
     },
     {
-      title: getYear().toString(),
-      value: getYear().toString()
+      NAME_VN: getYear().toString(),
+      ID: getYear().toString()
     },
     {
-      title: (getYear()+1).toString(),
-      value: (getYear()+1).toString(),
+      NAME_VN: (getYear()+1).toString(),
+      ID: (getYear()+1).toString(),
     },
    
   ])

@@ -183,12 +183,12 @@ class PDDMVS extends Component {
             />
           </View>
           <View style={{padding: 15, paddingTop: 0}}>
-            <TypeLot 
+            {/* <TypeLot 
               title={'Loại đăng ký'} 
               data={DMVS}
               value={this.state.value}
               onChange={(value) => this.setState({value})}
-            />
+            /> */}
             <TextInput 
               label='Nhân viên'
               value={this.state.employee}
@@ -209,41 +209,41 @@ class PDDMVS extends Component {
     )
   }
 
-  render() {
-    return (
-      <View style={css.container}>
-        <Nav label={this.props.title}/>
+	render() {
+		return (
+		<View style={css.container}>
+			<Nav label={this.props.title}/>
 
-        <View style={styles.content}>
-          
+			<View style={styles.content}>
+			
 
-          <View style={{flex: 1}}>
-            <FlatList 
-				data={this.state.data}
-				ListHeaderComponent = {() => this.renderHeader()}
-				keyExtractor={(item, index) => index.toString()}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7',paddingBottom: 15 }}
-				renderItem={data => this.renderItem(data.item)}
-            />
-          </View>
-          
-        </View>
-      </View>
-    );
-  }
+			<View style={{flex: 1}}>
+				<FlatList 
+					data={this.state.data}
+					ListHeaderComponent = {() => this.renderHeader()}
+					keyExtractor={(item, index) => index.toString()}
+					contentContainerStyle={{ backgroundColor: '#e7e7e7',paddingBottom: 15 }}
+					renderItem={data => this.renderItem(data.item)}
+				/>
+			</View>
+			
+			</View>
+		</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  ctDate: {
-    flexDirection: 'row',
-    margin: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#c2c4ca',
-    alignItems: 'center',
-  },
-  content: {
-    flex: 1,
-  },
+	ctDate: {
+		flexDirection: 'row',
+		margin: 15,
+		borderBottomWidth: 1,
+		borderBottomColor: '#c2c4ca',
+		alignItems: 'center',
+	},
+	content: {
+		flex: 1,
+	},
 });
 
 export default (PDDMVS);
