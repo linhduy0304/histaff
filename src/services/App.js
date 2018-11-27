@@ -2,6 +2,11 @@
 let HTTP = require('./HTTP');
 let URL = require('./URL');
 
+//getListEmployee
+export const getListEmployee = (empId) => {
+	return HTTP.get(`${URL.direct}/getlistemployeeportal?employeeid=${empId}`)
+}
+
 //getTypeLateEarly
 export const getTypeLateEarly = () => {
 	return HTTP.get(`${URL.attendance}/dmvs-type`)

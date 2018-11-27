@@ -19,10 +19,10 @@ export const getTrainInCompanySuccess = data => {
         data
     }
 }
-export const getTrainInCompany = (id, load) => {
+export const getTrainInCompany = (id, load, userName='') => {
     return dispatch => {
         dispatch(loading(true))
-        return Profile.getTrainInCompany(id, load).then(res => {
+        return Profile.getTrainInCompany(id, load, userName).then(res => {
             console.log(res)
             if(res.code === 500) {
                 dispatch(getTrainInCompanySuccess([]));

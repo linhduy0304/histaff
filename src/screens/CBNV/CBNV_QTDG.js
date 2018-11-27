@@ -24,15 +24,16 @@ import ItemQTDG from '../../components/TTCN/ItemQTDG';
 import NoData from '../../components/NoData';
 
 class CBNV_QTDG extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      	data: []
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: [],
+			empId: this.props.app.employees[0].ID,
+		}
+	}
 
   	componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'judge') //danh gia
+		this.props.getStaff(this.state.empId, 'judge') //danh gia
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -49,19 +50,39 @@ class CBNV_QTDG extends Component {
 		}else return null
 	}
 
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'judge')
+	}
+
 	render() {
+		const {empId} = this.state
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container, ]}>
 			{
                 this.props.staff.loading ?
                     <LoadingFull/>
                 : null
             }
 			<Nav label='Qúa trình đánh giá'/>
+			<Picker
+				mode = 'dropdown'
+				selectedValue={empId}
+				style={{marginHorizontal: 15}}
+				onValueChange={(value) => this.onChange(value)}
+			>
+				{
+					this.props.app.employees.map((item, index) => {
+					return (
+						<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+					)
+					})
+				}
+			</Picker>
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  <ItemQTDG data = {data.item}/>}
 			/>
@@ -87,6 +108,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profile,
 		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

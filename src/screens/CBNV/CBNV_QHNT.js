@@ -23,12 +23,13 @@ class CBNV_QHNT extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		data: []
+			data: [],
+			empId: this.props.app.employees[0].ID,
 		}
 	}
 	  
 	componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'family')
+		this.props.getStaff(this.state.empId, 'family')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -47,44 +48,67 @@ class CBNV_QHNT extends Component {
 
 	renderItem(data, index) {
 		return (
-		<View key={index} style={styles.ctItem}>
-			<View style={styles.ctName}>
-			<Image style={styles.icName} source={require('../../icons/ic_user.png')} />
-			<Text style={styles.txtName}>{data.FULLNAME}</Text>
+			<View style={{padding: 2}}>
+				<View key={index} style={styles.ctItem}>
+					<View style={styles.ctName}>
+					<Image style={styles.icName} source={require('../../icons/ic_user.png')} />
+					<Text style={styles.txtName}>{data.FULLNAME}</Text>
+					</View>
+					<View style={styles.ctName}>
+					<Image style={styles.icName} source={require('../../icons/ic_relation.png')} />
+					<Text style={styles.txtName}>{data.RELATION_NAME}</Text>
+					</View>
+					<View style={styles.ctName}>
+					<Image style={styles.icName} source={require('../../icons/ic_birthday.png')} />
+					<Text style={styles.txtName}>{data.BIRTH_DATE}</Text>
+					</View>
+					<View style={styles.ctName}>
+					<Image style={styles.icName} source={require('../../icons/ic_location.png')} />
+					<Text style={styles.txtName}>{data.ADDRESS}</Text>
+					</View>
+					<Text style={styles.txtStatus}>Trạng thái: <Text style={styles.txtValue}>{data.STATUS_NAME}</Text></Text>
+					<Text style={styles.txtStatus}>Lý do: <Text style={styles.txtValue}>{data.REASON_UNAPROVE}</Text></Text>
+					<Text style={styles.txtStatus}>Ghi chú: <Text style={styles.txtValue}>{data.REMARK}</Text></Text>
+				</View>
 			</View>
-			<View style={styles.ctName}>
-			<Image style={styles.icName} source={require('../../icons/ic_relation.png')} />
-			<Text style={styles.txtName}>{data.RELATION_NAME}</Text>
-			</View>
-			<View style={styles.ctName}>
-			<Image style={styles.icName} source={require('../../icons/ic_birthday.png')} />
-			<Text style={styles.txtName}>{data.BIRTH_DATE}</Text>
-			</View>
-			<View style={styles.ctName}>
-			<Image style={styles.icName} source={require('../../icons/ic_location.png')} />
-			<Text style={styles.txtName}>{data.ADDRESS}</Text>
-			</View>
-			<Text style={styles.txtStatus}>Trạng thái: <Text style={styles.txtValue}>{data.STATUS_NAME}</Text></Text>
-			<Text style={styles.txtStatus}>Lý do: <Text style={styles.txtValue}>{data.REASON_UNAPROVE}</Text></Text>
-			<Text style={styles.txtStatus}>Ghi chú: <Text style={styles.txtValue}>{data.REMARK}</Text></Text>
-		</View>
+		
 		)
+	}
+
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'family')
 	}
 
 
 	render() {
+		const {empId} = this.state
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container, ]}>
 			{
                 this.props.staff.loading ?
                     <LoadingFull/>
                 : null
             }
 			<Nav label='Quan hệ nhân thân'/>
+			<Picker
+				mode = 'dropdown'
+				selectedValue={empId}
+				style={{marginHorizontal: 15}}
+				onValueChange={(value) => this.onChange(value)}
+			>
+				{
+					this.props.app.employees.map((item, index) => {
+					return (
+						<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+					)
+					})
+				}
+			</Picker>
 			<FlatList
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  this.renderItem(data.item, data.index)}
 			/>
@@ -122,7 +146,15 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		borderRadius: 4,
 		paddingTop: 10,
-		padding: 15
+		padding: 15,
+		shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 20
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
+        elevation: 5,
 	},
 
 	body: {
@@ -140,6 +172,7 @@ const mapStateToProps = (state) => {
     return {
 		profile: state.profile,
 		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

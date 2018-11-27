@@ -34,7 +34,7 @@ class QTTDLPC extends Component {
 	}
 
 	componentWillMount = () => {
-		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'salary')
+		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'salary', this.props.profile.user.USERNAME)
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+        getTrainInCompany: (id, load, userName) => dispatch(getTrainInCompany(id, load, userName)),
     }
 }
 

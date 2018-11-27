@@ -3,11 +3,36 @@ import {
     PERIOD_SUCCESS,
     APP_TYPE_LEAVE_SUCCESS,
     APP_TYPE_OT_SUCCESS,
-    APP_TYPE_LATE_EARLY_SUCCESS
+    APP_TYPE_LATE_EARLY_SUCCESS,
+    APP_LIST_EMPLOYEE_SUCCESS
 } from "../config/types";
 import SimpleToast from 'react-native-simple-toast';
 
 const App = require('../services/App');
+
+//getListEmployee
+export const getListEmployeeSuccess = data => {
+    return {
+        type: APP_LIST_EMPLOYEE_SUCCESS,
+        data
+    }
+}
+export const getListEmployee = (empId) => {
+    return dispatch => {
+        return App.getListEmployee(empId).then(res => {
+            console.log(res)
+            if(res) {
+                dispatch(getListEmployeeSuccess(res))
+            }else {
+                dispatch(getListEmployeeSuccess([]))
+                SimpleToast.show('Có lỗi xảy ra. Vui lòng thử lại')
+            }
+        })
+        .catch((error) => {
+            dispatch(getListEmployeeSuccess([]))
+        });
+    };
+}
 
 //getTypeLateEarly
 export const getTypeLateEarlySuccess = data => {

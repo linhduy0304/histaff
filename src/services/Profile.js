@@ -3,7 +3,7 @@ let HTTP = require('./HTTP');
 let URL = require('./URL');
 
 //getTrainInCompany
-export const getTrainInCompany = (id, load) => {
+export const getTrainInCompany = (id, load, userName) => {
 	switch(load) {
 		case 'train-in':
 			return HTTP.get(`${URL.api}/empoloyeetrain/get/${id}`)
@@ -27,7 +27,7 @@ export const getTrainInCompany = (id, load) => {
 		case 'workingBefore':
 			return HTTP.get(`${URL.profile}/working-before?employeeId=${id}`)
 		case 'salary':
-			return HTTP.get(`${URL.profile}/salaryallowance?employeeID=${id}`)
+			return HTTP.get(`${URL.profile}/salaryallowance?employeeID=${id}&userName=${userName}`)
 		default:
 			return;
 	}

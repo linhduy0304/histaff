@@ -28,41 +28,62 @@ class CBNV_QTNL extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: []
+			data: [],
+			empId: this.props.app.employees[0].ID,
 		}
 	}
 	  
 	componentWillMount = () => {
-		this.props.getTrainInCompany(this.props.profile.user.EMPLOYEE_ID, 'talent')
+		this.props.getStaff(this.state.empId, 'talent')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.profile.trainCompany && nextProps.profile.trainCompany !== this.props.profile.trainCompany) {
-			this.setState({
-				data: nextProps.profile.trainCompany
-			})
-		}
+		if(nextProps.staff.staffs && nextProps.staff.staffs !== this.props.staff.staffs) {
+            this.setState({
+                data: nextProps.staff.staffs
+            })
+        }
 	};
 
 	renderFooter = () => {
-		if(this.state.data.length === 0 && !this.props.profile.loading) {
+		if(this.state.data.length === 0 && !this.props.staff.loading) {
 		return <NoData label='Không có dữ liệu'/>
 		}else return null
 	}
 
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'talent')
+	}
+
 	render() {
+		const {empId} = this.state
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container,]}>
 			{
-                this.props.profile.loading ?
+                this.props.staff.loading ?
                     <LoadingFull/>
                 : null
             }
 			<Nav label='Qúa trình năng lực'/>
+			<Picker
+				mode = 'dropdown'
+				selectedValue={empId}
+				style={{marginHorizontal: 15}}
+				onValueChange={(value) => this.onChange(value)}
+			>
+				{
+					this.props.app.employees.map((item, index) => {
+					return (
+						<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+					)
+					})
+				}
+			</Picker>
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  <ItemQTNL data = {data.item}/>}
 			/>
@@ -79,18 +100,20 @@ const styles = StyleSheet.create({
 });
 
 import { connect } from 'react-redux';
-import { getTrainInCompany } from '../../actions/profile';
+import { getStaff } from '../../actions/staff';
 import NoData from '../../components/NoData';
 import LoadingFull from '../../components/LoadingFull';
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+		profile: state.profile,
+		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {
-    return {
-        getTrainInCompany: (id, load) => dispatch(getTrainInCompany(id, load)),
+	return {
+        getStaff: (id, load, username) => dispatch(getStaff(id, load)),
     }
 }
 

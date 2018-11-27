@@ -51,7 +51,7 @@ class CBNV_HSNS extends Component {
         return (
         <View style={css.container}>
             {
-                this.props.profile.loading ?
+                this.props.staff.loading ?
                     <LoadingFull/>
                 : null
             }

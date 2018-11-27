@@ -18,9 +18,11 @@ class App extends Component {
         this.props.getTypeLeave();
         this.props.getTypeLateEarly();
         this.props.getPeriod(this.state.year)
+        
         new Store().getSession(Const.USER).then(user => {
             console.log(user)
             if(user) {
+                this.props.getListEmployee(1); //user.EMPLOYEE_ID
                 this.props.getDataUser(user)
                 Actions.home({type: 'reset'})
             }else {
@@ -39,7 +41,7 @@ class App extends Component {
 
 import { connect } from 'react-redux';
 import { getDataUser } from '../actions/auth';
-import { getPeriod, getTypeLeave, getTypeOt, getTypeLateEarly } from '../actions/app';
+import { getPeriod, getTypeLeave, getTypeOt, getTypeLateEarly, getListEmployee } from '../actions/app';
 import { getYear } from '../components/Functions';
 
 const mapStateToProps = (state) => {
@@ -54,6 +56,7 @@ const mapDispatchToProps = (dispatch) => {
         getTypeLeave: () => dispatch(getTypeLeave()),
         getTypeOt: () => dispatch(getTypeOt()),
         getTypeLateEarly: () => dispatch(getTypeLateEarly()),
+        getListEmployee: (empId) => dispatch(getListEmployee(empId)),
     }
 }
 

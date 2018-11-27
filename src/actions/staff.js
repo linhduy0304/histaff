@@ -22,10 +22,10 @@ export const getStaffSuccess = data => {
         data
     }
 }
-export const getStaff = (empId, load) => {
+export const getStaff = (empId, load, username ='') => {
     return dispatch => {
         dispatch(loading(true))
-        return Staff.getStaff(empId, load).then(res => {
+        return Staff.getStaff(empId, load, username).then(res => {
             console.log(res)
             if(res) {
                 dispatch(getStaffSuccess(res));

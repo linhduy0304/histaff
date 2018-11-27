@@ -26,11 +26,12 @@ class CBNV_QTKL extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		data: []
+			data: [],
+			empId: this.props.app.employees[0].ID,
     	}
 	}
 	componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'discipline') //ky luat
+		this.props.getStaff(this.state.empId, 'discipline') //ky luat
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -47,19 +48,39 @@ class CBNV_QTKL extends Component {
 		}else return null
 	}
 
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'discipline')
+	}
+
 	render() {
+		const {empId} = this.state
 		return (
-			<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			<View style={[css.container,]}>
 				{
 					this.props.staff.loading ?
 						<LoadingFull/>
 					: null
 				}
 				<Nav label='Qúa trình kỷ luật'/>
+				<Picker
+					mode = 'dropdown'
+					selectedValue={empId}
+					style={{marginHorizontal: 15}}
+					onValueChange={(value) => this.onChange(value)}
+				>
+					{
+						this.props.app.employees.map((item, index) => {
+						return (
+							<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+						)
+						})
+					}
+				</Picker>
 				<FlatList 
 					data={this.state.data}
 					ListFooterComponent={this.renderFooter}
-					contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+					contentContainerStyle={{ padding: 15}}
 					keyExtractor={(item, index) => index.toString()}
 					renderItem = {data =>  <ItemQTKL data = {data.item}/>}
 				/>
@@ -85,7 +106,8 @@ import LoadingFull from '../../components/LoadingFull';
 const mapStateToProps = (state) => {
     return {
 		profile: state.profile,
-		staff: state.staff
+		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {
