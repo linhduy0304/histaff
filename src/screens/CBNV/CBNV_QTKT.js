@@ -28,12 +28,13 @@ class CBNV_QTKT extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: []
+			data: [],
+			empId: this.props.app.employees[0].ID,
 		}
 	}
 
 	componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'commend')
+		this.props.getStaff(this.state.empId, 'commend')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -50,7 +51,13 @@ class CBNV_QTKT extends Component {
 		}else return null
 	}
 
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'train_in')
+	}
+
 	render() {
+		const {empId} = this.state
 		return (
 		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
 			{
@@ -59,6 +66,20 @@ class CBNV_QTKT extends Component {
                 : null
             }
 			<Nav label='Qúa trình khen thưởng'/>
+			<Picker
+					mode = 'dropdown'
+					selectedValue={empId}
+					style={{marginHorizontal: 15}}
+					onValueChange={(value) => this.onChange(value)}
+				>
+					{
+						this.props.app.employees.map((item, index) => {
+						return (
+							<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+						)
+						})
+					}
+			</Picker>
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
@@ -88,6 +109,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profile,
 		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

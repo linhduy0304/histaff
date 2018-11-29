@@ -13,10 +13,10 @@ import {
   Alert
 } from 'react-native';
 import HeaderMenu from './HeaderMenu';
-import {menu} from '../../config/System'
+import {menu, colorPrimary} from '../../config/System'
 import Const from '../../services/Const';
 import { Actions } from '../../../node_modules/react-native-router-flux';
-
+import StBar from '../StBar'
 import DeviceInfo from 'react-native-device-info';
 const Store = require('../../services/Store').default;
 const marginTop = Platform.OS === 'ios' ? 0 : DeviceInfo.getSystemVersion().slice(0, 1) != 4 ? StatusBar.currentHeight : 0;
@@ -242,13 +242,22 @@ class Menu extends Component {
 	render () {
 		return (
 		<ScrollView style={{backgroundColor: '#303030'}}>
-			<View style={{marginTop}}>
-			<HeaderMenu logout={() => this.logout()} data={this.props.profile.user}/>
+			<StatusBar
+				backgroundColor={colorPrimary}
+				barStyle='light-content'
+			/>
 			{
-				menu.map((item, index) => {
-				return this.renderMenu(item, index)
-				})
+				Platform.OS === 'ios' ?
+					<StBar/>
+				: null
 			}
+			<View>
+				<HeaderMenu logout={() => this.logout()} data={this.props.profile.user}/>
+				{
+					menu.map((item, index) => {
+					return this.renderMenu(item, index)
+					})
+				}
 			</View>
 		</ScrollView>
 		)

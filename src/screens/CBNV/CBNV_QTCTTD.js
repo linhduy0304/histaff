@@ -26,12 +26,13 @@ class CBNV_QTCTTD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        data: []
+            data: [],
+            empId: this.props.app.employees[0].ID,
         }
     }
 
     componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'workingBefore')
+		this.props.getStaff(this.state.empId, 'workingBefore')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -46,9 +47,15 @@ class CBNV_QTCTTD extends Component {
 		if(this.state.data.length === 0 && !this.props.staff.loading) {
 		return <NoData label='Không có dữ liệu'/>
 		}else return null
+    }
+    
+    onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'workingBefore')
 	}
 
     render() {
+        const {empId} = this.state
         return (
             <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
                 {
@@ -57,6 +64,20 @@ class CBNV_QTCTTD extends Component {
                     : null
                 }
                 <Nav label='Qúa trình công tác trước đây'/>
+                <Picker
+					mode = 'dropdown'
+					selectedValue={empId}
+					style={{marginHorizontal: 15}}
+					onValueChange={(value) => this.onChange(value)}
+				>
+					{
+						this.props.app.employees.map((item, index) => {
+						return (
+							<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+						)
+						})
+					}
+				</Picker>
                 <FlatList 
                     data={this.state.data}
                     ListFooterComponent={this.renderFooter}
@@ -86,7 +107,8 @@ import LoadingFull from '../../components/LoadingFull';
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-		staff: state.staff,
+        staff: state.staff,
+        app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

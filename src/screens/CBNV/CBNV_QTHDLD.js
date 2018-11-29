@@ -20,7 +20,7 @@ import {
 import Nav from '../../components/Nav';
 import css from '../../config/css';
 import { Actions } from '../../../node_modules/react-native-router-flux';
-import ItemQTHDLD from '../../components/TTCN/ItemQTHDLD';
+import ItemQTHDLD from '../../components/employee/ItemQTHDLD';
 
 const window = Dimensions.get('window');
 
@@ -28,12 +28,13 @@ class CBNV_QTHDLD extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: []
+			data: [],
+			empId: this.props.app.employees[0].ID,
 		}
 	}
 
 	componentWillMount = () => {
-		this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'contract')
+		this.props.getStaff(this.state.empId, 'contract')
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -50,7 +51,13 @@ class CBNV_QTHDLD extends Component {
 		}else return null
 	}
 
+	onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'train_in')
+	}
+
 	render() {
+		const {empId} = this.state
 		return (
 		<View style={[css.container, ]}>
 			{
@@ -59,6 +66,20 @@ class CBNV_QTHDLD extends Component {
                 : null
             }
 			<Nav label='Qúa trình hợp đồng lao động'/>
+			<Picker
+					mode = 'dropdown'
+					selectedValue={empId}
+					style={{marginHorizontal: 15}}
+					onValueChange={(value) => this.onChange(value)}
+				>
+					{
+						this.props.app.employees.map((item, index) => {
+						return (
+							<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+						)
+						})
+					}
+			</Picker>
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
@@ -87,6 +108,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profile,
 		staff: state.staff,
+		app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

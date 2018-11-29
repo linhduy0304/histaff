@@ -30,11 +30,12 @@ class CBNV_HSNS extends Component {
         super(props);
         this.state = {
             data: '',
+            empId: this.props.app.employees[0].ID,
         }
     }
 
     componentWillMount = () => {
-        this.props.getStaff(this.props.profile.user.EMPLOYEE_ID, 'profile')
+        this.props.getStaff(this.state.empId, 'profile')
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -44,9 +45,14 @@ class CBNV_HSNS extends Component {
             })
         }
     };
+
+    onChange = value => {
+		this.setState({empId: value})
+		this.props.getStaff(value, 'profile')
+	}
     
     render() {
-        const { data } = this.state;
+        const { data, empId } = this.state;
         console.log(data)
         return (
         <View style={css.container}>
@@ -58,7 +64,20 @@ class CBNV_HSNS extends Component {
             <Nav
                 label='Hồ sơ nhân sự'
             />
-
+            <Picker
+					mode = 'dropdown'
+					selectedValue={empId}
+					style={{marginHorizontal: 15}}
+					onValueChange={(value) => this.onChange(value)}
+				>
+					{
+						this.props.app.employees.map((item, index) => {
+						return (
+							<Picker.Item key={index} label={item.FULLNAME_VN} value={item.ID} />
+						)
+						})
+					}
+            </Picker>
             <ScrollView
             bounces={false}
             keyboardShouldPersistTaps={'always'}
@@ -76,7 +95,7 @@ class CBNV_HSNS extends Component {
                     <View style={{flex: 1, marginLeft: 15}}>
                         <TextShow
                         label='Tên hiển thị'
-                        value={data.FIRST_NAME_VN}
+                        value={data.FULLNAME_VN}
                         />
                         <View style={{flexDirection: 'row', marginTop: 5}}>
                         <Text style={{color: 'rgb(194, 196, 202)'}} >Giới tính:</Text>
@@ -84,7 +103,7 @@ class CBNV_HSNS extends Component {
                             <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
                             <View style={styles.ctTick}>
                                 {
-                                this.state.sex == 1 ?
+                                data.GeGender === 'Nam' ?
                                     <Image source={require('../../icons/ic_check_green.png')}/>
                                     : null
                                 }
@@ -94,7 +113,7 @@ class CBNV_HSNS extends Component {
                             <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
                             <View style={styles.ctTick}>
                             {
-                                this.state.sex == 0 ?
+                                data.GeGender === 'Nữ' ?
                                 <Image source={require('../../icons/ic_check_green.png')}/>
                                 : null
                             }
@@ -121,7 +140,7 @@ class CBNV_HSNS extends Component {
                     />
                     <TextShow
                         label='Ngày sinh'
-                        value={data.BIRTH_DATE}
+                        value={convertDateTime(data.BirthDate)}
                     />
                     </View>
                     <View style={{flexDirection: 'row', }}>
@@ -131,7 +150,7 @@ class CBNV_HSNS extends Component {
                     />
                     <TextShow
                         label='Ngày cấp'
-                        value={data.ID_DATE}
+                        value={data.IDDate}
                     />
                     <TextShow
                         label='Nơi cấp'
@@ -149,7 +168,7 @@ class CBNV_HSNS extends Component {
                     />
                     <TextShow
                         label='Địa chỉ'
-                        value={data.WORK_EMAIL}
+                        value={data.PER_ADDRESS}
                     />
                     </View>
                 </View>
@@ -187,10 +206,12 @@ const styles = StyleSheet.create({
 
 import { connect } from 'react-redux';
 import { getStaff } from '../../actions/staff';
+import { convertDateTime } from '../../components/Functions';
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
         staff: state.staff,
+        app: state.app
     }
 }
 const mapDispatchToProps = (dispatch) => {

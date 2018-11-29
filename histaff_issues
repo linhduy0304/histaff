@@ -1,0 +1,28 @@
+CREATED_BY gửi lên rồi nhưng trả về username = null trong danh sách đăng ký
+
+18-11
+1: http://118.70.12.130:4444/profile/salaryallowance?employeeID=1 lỗi
+2: http://118.70.12.130:4444/api/competencyperiodlist/get/1 khi trả về ko có dữ liệu đang là {} => trả về []
+
+3: Cán bộ nhân viên:
+    - Thông tin hồ sơ trả về 1 mảng nhân viên. Hiẹn tại đang trả về 1 {} chỉ có 1 nhân viên
+    - direct/employee-family sưa lại thành phương thức get
+    - http://118.70.12.130:4444/direct/working-process?employeeId=1 lỗi
+    - Chưa có api quá trình đánh gía
+    - Chưa có api quá trình đào tạo trong công ty
+    - Chưa có api quá trình đào tạo năng lực
+    - Gộp quá trình lương và phụ cấp thành 1 như thông tin cá nhân
+4: Bổ sung api phê duyệt nghỉ, làm thêm, đi muộn về sớm 
+5: api lấy thông tin yêu cầu đào tạo, 
+6: api lấy thông tin yêu cầu tuyển dụng recruitment/title-plan?requestId={} : requestId là gì vâỵ
+7: api lấy thông tin hồ sơ trong
+
+
+-- Cán bộ nhân viên
+    -Thông tin hồ sơ --done
+    - Quá trình công tác trước đây, --done
+    - Quá trình đào tạo ngoài công ty --done
+    -Qua trình khen thưởng, --done
+    - Quá trình hợp đồng lao động -done
+
+-- Yêu cầu tuyển dụng, yêu cầu đào tạo

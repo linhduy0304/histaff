@@ -6,11 +6,11 @@ let URL = require('./URL');
 export const getStaff = (id, load, username) => {
 	switch(load) {
 		case 'profile':
-			return HTTP.get(`${URL.direct}/employee?employeeId=${id}`)
+			return HTTP.get(`${URL.profile}/employee/get/${id}`)
 		case 'train_in':
 			return HTTP.get(`${URL.direct}/employeetrain/get/${id}`)
 		case 'train_out':
-			return HTTP.get(`${URL.direct}/process-train-out?employeeId=${id}`)
+			return HTTP.get(`${URL.api}/protrainoutcompany/get/${id}`)
 		case 'judge': //danh gia
 			return HTTP.get(`${URL.direct}/getkpiassessemp/${id}`)
 		case 'talent': //nang luc
@@ -19,7 +19,7 @@ export const getStaff = (id, load, username) => {
 			return HTTP.get(`${URL.direct}/discipline?employeeId=${id}`)
 		//khen thuonwgr
 		case 'commend':
-			return HTTP.get(`${URL.direct}/commend?employeeId=${id}`)
+			return HTTP.get(`${URL.profile}/commend?employeeId=${id}`)
 		case 'workingNow':
 			return HTTP.get(`${URL.direct}/working-process?employeeId=${id}&username=${username}`)
 		case 'contract':
@@ -27,7 +27,7 @@ export const getStaff = (id, load, username) => {
 		case 'family':
 			return HTTP.get(`${URL.profile}/family-edit?employeeId=${id}`)
 		case 'workingBefore':
-			return HTTP.get(`${URL.direct}/working-before?employeeId=${id}`)
+			return HTTP.get(`${URL.profile}/working-before?employeeId=${id}`)
 		case 'salary':
 			return HTTP.get(`${URL.profile}/salaryallowance?employeeID=${id}&userName=${username}`)
 		default:

@@ -47,6 +47,7 @@ class HSNS extends Component {
     
     render() {
         const { data } = this.state;
+        console.log(data)
         return (
         <View style={css.container}>
             {
@@ -83,7 +84,7 @@ class HSNS extends Component {
                             <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
                             <View style={styles.ctTick}>
                                 {
-                                this.state.sex == 1 ?
+                                data.GENDER_NAME == 'Nam' ?
                                     <Image source={require('../../icons/ic_check_green.png')}/>
                                     : null
                                 }
@@ -93,7 +94,7 @@ class HSNS extends Component {
                             <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
                             <View style={styles.ctTick}>
                             {
-                                this.state.sex == 0 ?
+                                data.GENDER_NAME == 'Nữ' ?
                                 <Image source={require('../../icons/ic_check_green.png')}/>
                                 : null
                             }
