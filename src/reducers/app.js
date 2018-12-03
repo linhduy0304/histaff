@@ -9,10 +9,11 @@ import {
   
 const initialState = {
     loading: null,
-    typeLeave: null,
-    typeOt: null,
-    typeLateEarly: null,
-    employees: null,
+    typeLeave: [],
+    typeOt: [],
+    typeLateEarly: [],
+    employees: [],
+    periods: []
 }
   
 export default function app (state = initialState, action) {

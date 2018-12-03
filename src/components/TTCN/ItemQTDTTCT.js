@@ -5,12 +5,12 @@ import {
 	Text,
 	StyleSheet,
 } from 'react-native';
-import { family_label, family_value} from '../../config/System'
+import { family_label, family_value, colorBlack} from '../../config/System'
 import { convertDateTime } from '../Functions';
 
 const ItemQTDTTCT = ({
-  data,
-  // onPress = item,
+	data,
+	// onPress = item,
 }) => (
 	<View style={{padding: 2}}>
 		<View style={css.ctItem}>
@@ -42,31 +42,31 @@ const ItemQTDTTCT = ({
 )
 
 const css = StyleSheet.create({
-  txtValue: {
-    fontSize: 14,
-    color: '#1f2a35',
-    fontFamily: family_value
-  },
-  txtStatus: {
-    color: '#c2c4ca',
-    // fontSize: 12,
-    fontFamily: family_label
-  },
-  ctItem: {
-    backgroundColor: '#fff',
-    marginBottom: 10,
-    borderRadius: 4,
-    paddingTop: 10,
-    padding: 15,
-	shadowColor: 'black',
-	shadowOffset: {
-		width: 0,
-		height: 20
+	txtValue: {
+		fontSize: 14,
+		color: colorBlack,
+		fontFamily: family_value
 	},
-	shadowRadius: 10,
-	shadowOpacity: 0.3,
-	elevation: 5,
-  },
+	txtStatus: {
+		color: '#c2c4ca',
+		// fontSize: 12,
+		fontFamily: family_label
+	},
+	ctItem: {
+		backgroundColor: '#fff',
+		marginBottom: 10,
+		borderRadius: 4,
+		paddingTop: 10,
+		padding: 15,
+		shadowColor: 'black',
+		shadowOffset: {
+			width: 0,
+			height: 20
+		},
+		shadowRadius: 10,
+		shadowOpacity: 0.3,
+		elevation: 5,
+	},
 })
 
 export default ItemQTDTTCT;

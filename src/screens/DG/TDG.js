@@ -6,15 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Picker, 
-  FlatList,
-  Dimensions,
+	Platform,
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	Image,
+	Picker, 
+	FlatList,
+	Dimensions,
 } from 'react-native';
 import Nav from '../../components/Nav';
 import css from '../../config/css';
@@ -22,42 +22,50 @@ import { Actions } from '../../../node_modules/react-native-router-flux';
 import ItemTDG from '../../components/DG/ItemTDG';
 
 class TDG extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        {
-          KPI: '2018',
-          TCKPI: '2',
-          CT: 'Tốt',
-          TS: '1',
-          TN: 'Không xác định',
-          DN: 'Không xác định',
-          KQ: 'Không xác định',
-          NCN: '01/01/2018',
-          QLDG: '',
-          DQD: '',
-          NDG: '',
-          TT: '',
-        },
-        
-      ]
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: []
+		}
+	}
 
-  render() {
-    return (
-      <View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
-        <Nav label='Tự đánh giá'/>
-        <FlatList 
-          data={this.state.data}
-          keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
-          renderItem = {data =>  <ItemTDG data = {data.item}/>}
-        />
-      </View>
-    );
-  }
+	componentWillMount = () => {
+		this.props.getAssessment(this.props.profile.user.EMPLOYEE_ID, 'emp') //danh gia
+	};
+
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.assessment.assessment && nextProps.assessment.assessment !== this.props.assessment.assessment) {
+			this.setState({
+				data: nextProps.assessment.assessment
+			})
+		}
+	};
+
+	renderFooter = () => {
+		if(this.state.data.length === 0 && !this.props.assessment.loading) {
+			return <NoData label='Không có dữ liệu'/>
+		}else return null
+	}
+
+	render() {
+		return (
+		<View style={[css.container, ]}>
+			{
+                this.props.assessment.loading ?
+                    <LoadingFull/>
+                : null
+            }
+			<Nav label='Tự đánh giá'/>
+			<FlatList 
+				data={this.state.data}
+				ListFooterComponent={this.renderFooter}
+				keyExtractor={(item, index) => index.toString()}
+				contentContainerStyle={{ padding: 15}}
+				renderItem = {data =>  <ItemTDG data = {data.item}/>}
+			/>
+		</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
@@ -69,4 +77,21 @@ const styles = StyleSheet.create({
 
 });
 
-export default (TDG)
+import { connect } from 'react-redux';
+import { getAssessment } from '../../actions/assessment';
+import LoadingFull from '../../components/LoadingFull';
+import NoData from '../../components/NoData';
+
+const mapStateToProps = (state) => {
+    return {
+		assessment: state.assessment,
+		profile: state.profile
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAssessment: (id, load) => dispatch(getAssessment(id, load)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TDG)

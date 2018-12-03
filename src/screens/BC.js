@@ -34,7 +34,7 @@ class BC extends Component {
 			data: [],
 			open: false,
 			periodId: '',
-			periods: this.props.app.periods
+			periods: this.props.app.periods 
 		}
 	}
 
@@ -68,7 +68,7 @@ class BC extends Component {
 	render() {
 		const {data, year, periods, periodId} = this.state
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container,]}>
 			{
                 this.props.timesheet.loading ?
                     <LoadingFull/>
@@ -103,7 +103,7 @@ class BC extends Component {
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
 				keyExtractor={(item, index) => index.toString()}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				renderItem = {data =>  <ItemBC data = {data.item}/>}
 			/>
 			{/* <ModalPeriod

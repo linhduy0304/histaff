@@ -50,6 +50,7 @@ import DKDMVS from './screens/LOT/DKDMVS';
 import ApproveLeave from './screens/ApproveLeave';
 import ApproveOt from './screens/ApproveOt';
 import ApproveLateEarly from './screens/ApproveLateEarly';
+import TrainHistory from './screens/TrainHistory';
 
 const Main = () => (
   <Provider store = {store}>
@@ -87,6 +88,7 @@ const Main = () => (
 
 			<Scene key="bc" component={BC}/>
 			<Scene key="pl" component={PL}/>
+			<Scene key="trainHistory" component={TrainHistory}/>
 
 			<Scene key="tdg" component={TDG}/>
 			<Scene key="kpicn" component={KPICN}/>

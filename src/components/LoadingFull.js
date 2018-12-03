@@ -5,7 +5,9 @@ import { Image, View, Text, } from 'react-native';
 import { screen } from '../config/System';
 
 
-const LoadingFull = () => (
+const LoadingFull = ({
+	text = 'Đang tải dữ liệu...'
+}) => (
     <View style={{
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
 		alignItems: 'center',
@@ -25,7 +27,7 @@ const LoadingFull = () => (
 			borderRadius: 5
 		}}>
         	<Image style={{width: 80, height: 80}} source={require('../icons/loading.gif')} />
-	  		<Text>Đang tải dữ liệu...</Text>
+	  		<Text>{text}</Text>
 		</View>
       </View>
 );

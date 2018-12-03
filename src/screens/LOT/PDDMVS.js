@@ -27,108 +27,108 @@ import TextInput from '../../components/Input';
 import Button from '../../components/Button';
 
 class PDDMVS extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'P/B',
-      employee: '',
-      time_start: '',
-      time_end: '',
-      data: [
-        {
-          id: 1,
-          full_name: 'Le Linh Duy',
-          time: '01/01/2017',
-          time_start: '01/01/2017',
-          time_end: '10/01/2017',
-          LDK: 'Đăng ký về sớm',
-          CTDK: 'Không xác định',
-          TSG: 2,
-          type: 1,
-          note: ''
-        },
-        {
-          id: 1,
-          full_name: 'Le Linh Duy',
-          time: '01/01/2017',
-          time_start: '01/01/2017',
-          time_end: '10/01/2017',
-          LDK: 'Đăng ký về sớm',
-          CTDK: 'Không xác định',
-          TSG: 2,
-          type: 0,
-          note: ''
-        },
-        {
-          id: 1,
-          full_name: 'Le Linh Duy',
-          time: '01/01/2017',
-          time_start: '01/01/2017',
-          time_end: '10/01/2017',
-          LDK: 'Đăng ký về sớm',
-          CTDK: 'Không xác định',
-          TSG: 2,
-          type: 2,
-          note: ''
-        },
-      ]
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+		value: 'P/B',
+		employee: '',
+		time_start: '',
+		time_end: '',
+		data: [
+			{
+			id: 1,
+			full_name: 'Le Linh Duy',
+			time: '01/01/2017',
+			time_start: '01/01/2017',
+			time_end: '10/01/2017',
+			LDK: 'Đăng ký về sớm',
+			CTDK: 'Không xác định',
+			TSG: 2,
+			type: 1,
+			note: ''
+			},
+			{
+			id: 1,
+			full_name: 'Le Linh Duy',
+			time: '01/01/2017',
+			time_start: '01/01/2017',
+			time_end: '10/01/2017',
+			LDK: 'Đăng ký về sớm',
+			CTDK: 'Không xác định',
+			TSG: 2,
+			type: 0,
+			note: ''
+			},
+			{
+			id: 1,
+			full_name: 'Le Linh Duy',
+			time: '01/01/2017',
+			time_start: '01/01/2017',
+			time_end: '10/01/2017',
+			LDK: 'Đăng ký về sớm',
+			CTDK: 'Không xác định',
+			TSG: 2,
+			type: 2,
+			note: ''
+			},
+		]
+		}
+	}
 
-  renderAction(type) {
-    switch(type) {
-      case 0:
-        return (
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flex: 1,paddingRight: 15}}>
-              <Button 
-                title = 'Duyệt'
-                color = 'white'
-                height = {35}
-                marginTop = {10}
-                onPress = {() => null}
-                fontSize = {14}
-                fontWeight = '400'
-                backgroundColor = 'rgb(38, 114, 203)'
-              />
-            </View>
-            <View style={{flex: 1, paddingLeft: 15}}>
-              <Button 
-                title = 'Không duyệt'
-                color = 'white'
-                height = {35}
-                marginTop = {10}
-                onPress = {() => null}
-                fontSize = {14}
-                fontWeight = '400'
-                backgroundColor = '#D83601'
-              />
-            </View>
-          </View>
-        )
-      case 1:
-        return <Text><Text>Trạng thái: </Text>Đã duyệt</Text>
-      default:
-        return <Text><Text>Trạng thái: </Text>Không duyệt</Text>
-    }
-  }
+	renderAction(type) {
+		switch(type) {
+		case 0:
+			return (
+			<View style={{flexDirection: 'row'}}>
+				<View style={{flex: 1,paddingRight: 15}}>
+				<Button 
+					title = 'Duyệt'
+					color = 'white'
+					height = {35}
+					marginTop = {10}
+					onPress = {() => null}
+					fontSize = {14}
+					fontWeight = '400'
+					backgroundColor = 'rgb(38, 114, 203)'
+				/>
+				</View>
+				<View style={{flex: 1, paddingLeft: 15}}>
+				<Button 
+					title = 'Không duyệt'
+					color = 'white'
+					height = {35}
+					marginTop = {10}
+					onPress = {() => null}
+					fontSize = {14}
+					fontWeight = '400'
+					backgroundColor = '#D83601'
+				/>
+				</View>
+			</View>
+			)
+		case 1:
+			return <Text><Text>Trạng thái: </Text>Đã duyệt</Text>
+		default:
+			return <Text><Text>Trạng thái: </Text>Không duyệt</Text>
+		}
+	}
 
-  renderItem(data) {
-    return (
-      <View style={{padding: 15, margin: 15, backgroundColor: '#fff', marginBottom: 0, borderRadius: 4}}>
-        <Text><Text>Mã NV: </Text>{data.id}</Text>
-        <Text><Text>Tên NV: </Text>{data.full_name}</Text>
-        <Text><Text>Ngày đăng ký: </Text>{data.time}</Text>
-        <Text><Text>Từ ngày: </Text>{data.time_start}</Text>
-        <Text><Text>Đến ngày: </Text>{data.time_end}</Text>
-        <Text><Text>Loại đăng ký: </Text>{data.LDK}</Text>
-        <Text><Text>Chi tiết đăng ký: </Text>{data.CTDK}</Text>
-        <Text><Text>Tổng số phút: </Text>{data.TSG}</Text>
-        <Text><Text>Ghi chú: </Text>{data.note}</Text>
-        {this.renderAction(data.type)}
-      </View>
-    )
-  }
+	renderItem(data) {
+		return (
+		<View style={{padding: 15, margin: 15, backgroundColor: '#fff', marginBottom: 0, borderRadius: 4}}>
+			<Text><Text>Mã NV: </Text>{data.id}</Text>
+			<Text><Text>Tên NV: </Text>{data.full_name}</Text>
+			<Text><Text>Ngày đăng ký: </Text>{data.time}</Text>
+			<Text><Text>Từ ngày: </Text>{data.time_start}</Text>
+			<Text><Text>Đến ngày: </Text>{data.time_end}</Text>
+			<Text><Text>Loại đăng ký: </Text>{data.LDK}</Text>
+			<Text><Text>Chi tiết đăng ký: </Text>{data.CTDK}</Text>
+			<Text><Text>Tổng số phút: </Text>{data.TSG}</Text>
+			<Text><Text>Ghi chú: </Text>{data.note}</Text>
+			{this.renderAction(data.type)}
+		</View>
+		)
+	}
 
   renderHeader() {
     return (

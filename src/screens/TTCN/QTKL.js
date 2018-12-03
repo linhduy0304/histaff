@@ -51,7 +51,7 @@ class QTKL extends Component {
 
 	render() {
 		return (
-			<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+			<View style={[css.container,]}>
 				{
 					this.props.profile.loading ?
 						<LoadingFull/>
@@ -61,7 +61,7 @@ class QTKL extends Component {
 				<FlatList 
 					data={this.state.data}
 					ListFooterComponent={this.renderFooter}
-					contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+					contentContainerStyle={{ padding: 15}}
 					keyExtractor={(item, index) => index.toString()}
 					renderItem = {data =>  <ItemQTKL data = {data.item}/>}
 				/>

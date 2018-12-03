@@ -12,7 +12,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {family_label, family_value} from '../../config/System';
+import {family_label, family_value, colorBlack} from '../../config/System';
 import css from '../../config/css';
 import { Actions } from 'react-native-router-flux';
 import Nav from '../../components/Nav';
@@ -24,12 +24,14 @@ class CBNV_QHNT extends Component {
 		super(props);
 		this.state = {
 			data: [],
-			empId: this.props.app.employees[0].ID,
+			empId: this.props.app.employees.length > 0 ? this.props.app.employees[0].ID : '',
 		}
 	}
 	  
 	componentWillMount = () => {
-		this.props.getStaff(this.state.empId, 'family')
+		if(this.props.app.employees.length > 0) {
+			this.props.getStaff(this.state.empId, 'family')
+		}
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -120,7 +122,7 @@ class CBNV_QHNT extends Component {
 const styles = StyleSheet.create({
 	txtValue: {
 		fontSize: 14,
-		color: '#1f2a35',
+		color: colorBlack,
 		fontFamily: family_value
 	},
 	txtStatus: {
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
 		fontFamily: family_label
 	},
 	txtName: {
-		color: '#1f2a35'
+		color: colorBlack
 	},
 	icName: {
 		height: 15, 

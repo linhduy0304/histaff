@@ -97,7 +97,6 @@ class Menu extends Component {
 
 			//CBNV
 			case 'CBNV_TTHS':
-			console.log('aaa')
 				Actions.cbnv_hsns();
 				return;
 			case 'CBNV-QHNT':
@@ -175,7 +174,7 @@ class Menu extends Component {
 				})
 				Actions.bc()
 				return;
-				case 'PL':
+			case 'PL':
 				this.setState({
 				showChild: []
 				})
@@ -207,6 +206,12 @@ class Menu extends Component {
 				this.setState({
 				showChild: a
 				})
+				return;
+			case 'LSDT':
+				this.setState({
+					showChild: []
+				})
+				Actions.trainHistory()
 				return;
 			case 'HDSD':
 				this.setState({

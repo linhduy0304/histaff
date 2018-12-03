@@ -30,12 +30,14 @@ class CBNV_HSNS extends Component {
         super(props);
         this.state = {
             data: '',
-            empId: this.props.app.employees[0].ID,
+            empId: this.props.app.employees.length > 0 ? this.props.app.employees[0].ID : 'kkkk',
         }
     }
 
     componentWillMount = () => {
-        this.props.getStaff(this.state.empId, 'profile')
+        if(this.props.app.employees.length > 0) {
+            this.props.getStaff(this.state.empId, 'profile')
+        }
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -108,7 +110,7 @@ class CBNV_HSNS extends Component {
                                     : null
                                 }
                             </View>
-                            <Text style={{color: 'rgb(31, 42, 53)'}}>Nam</Text>
+                            <Text style={{color: colorBlack}}>Nam</Text>
                             </View>
                             <View onPress={() => this.setState({sex: this.state.sex == 0 ? 1: 0})} style={styles.ctSex}>
                             <View style={styles.ctTick}>
@@ -118,7 +120,7 @@ class CBNV_HSNS extends Component {
                                 : null
                             }
                             </View>
-                            <Text style={{color: 'rgb(31, 42, 53)'}}>Nữ</Text>
+                            <Text style={{color: colorBlack}}>Nữ</Text>
                             </View>
                         </View>
                         </View>
@@ -207,6 +209,7 @@ const styles = StyleSheet.create({
 import { connect } from 'react-redux';
 import { getStaff } from '../../actions/staff';
 import { convertDateTime } from '../../components/Functions';
+import { colorBlack } from '../../config/System';
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,

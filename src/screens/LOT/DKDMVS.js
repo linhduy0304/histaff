@@ -32,7 +32,7 @@ class DKDMVS extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
-			value: this.props.app.typeLateEarly[0].ID,
+			value: this.props.app.typeLateEarly.length > 0 ? this.props.app.typeLateEarly[0].ID : '',
 			reason: '',
 			arrFilter: [0, 1, 2, 3],
 			time: '',

@@ -20,7 +20,6 @@ export const getListEmployeeSuccess = data => {
 export const getListEmployee = (empId) => {
     return dispatch => {
         return App.getListEmployee(empId).then(res => {
-            console.log(res)
             if(res) {
                 dispatch(getListEmployeeSuccess(res))
             }else {

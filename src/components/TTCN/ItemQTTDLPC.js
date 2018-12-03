@@ -8,7 +8,7 @@ import {
 	StyleSheet,
 	Dimensions,
 } from 'react-native';
-import { family_label, family_value} from '../../config/System'
+import { family_label, family_value, colorBlack} from '../../config/System'
 import { convertDateTime } from '../Functions';
 
 const ItemQTTDLPC = ({
@@ -39,7 +39,7 @@ const ItemQTTDLPC = ({
 const css = StyleSheet.create({
 	txtValue: {
 		fontSize: 14,
-		color: '#1f2a35',
+		color: colorBlack,
 		fontFamily: family_value
 	},
 	txtStatus: {

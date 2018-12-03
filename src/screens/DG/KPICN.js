@@ -52,7 +52,7 @@ class KPICN extends Component {
 
 	render() {
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container, ]}>
 			{
                 this.props.assessment.loading ?
                     <LoadingFull/>
@@ -63,7 +63,7 @@ class KPICN extends Component {
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
 				keyExtractor={(item, index) => index.toString()}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				renderItem = {data =>  <ItemKPICN data = {data.item}/>}
 			/>
 		</View>

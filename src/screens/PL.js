@@ -71,7 +71,7 @@ class PL extends Component {
 	render() {
 		const {data, year, periods, period} = this.state
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container, ]}>
 			{
 				this.props.payroll.loading ?
 					<LoadingFull/>
@@ -108,7 +108,7 @@ class PL extends Component {
 				data={data}
 				ListFooterComponent={this.renderFooter}
 				keyExtractor={(item, index) => index.toString()}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{padding: 15}}
 				renderItem = {data =>  <ItemBC data = {data.item}/>}
 			/>
 			</View>

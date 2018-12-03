@@ -53,7 +53,7 @@ class QTTDLPC extends Component {
 
 	render() {
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container,]}>
 			{
                 this.props.profile.loading ?
                     <LoadingFull/>
@@ -62,7 +62,7 @@ class QTTDLPC extends Component {
 			<Nav label='Qúa trình thay đổi lương - phụ cấp'/>
 			<FlatList 
 				data={this.state.data}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  <ItemQTTDLPC data = {data.item}/>}
 			/>

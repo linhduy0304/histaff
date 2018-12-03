@@ -4,8 +4,9 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 
 export const colorPrimary = '#1ab394';
-export const family_label= 'RobotoCondensed-Regular';
-export const  family_value= 'Comfortaa-Regular';
+export const colorBlack = '#414e68';
+export const family_label= 'SFCompactDisplay-Regular';
+export const  family_value= 'SFCompactDisplay-Regular';
 export const screen = Dimensions.get('window');
 export const Month = ([
     {
@@ -487,28 +488,34 @@ export const Month = ([
         // },
       ]
     },
-    {
-      fa: 'Tuyển dụng',
+     {
+      fa: 'Lich sử đào tạo',
       icon: require('../icons/ic_users.png'),
-      value: 'TD',
-      child: [
-        {
-          title: 'Yêu cầu tuyển dụng',
-          value: 'YCTD'
-        },
-      ]
+      value: 'LSDT',
+      child: []
     },
-    {
-      fa: 'Đào tạo',
-      icon: require('../icons/ic_edu.png'),
-      value: 'DT',
-      child: [
-        {
-          title: 'Yêu cầu đào tạo',
-          value: 'YCDT'
-        },
-      ]
-    },
+    // {
+    //   fa: 'Tuyển dụng',
+    //   icon: require('../icons/ic_users.png'),
+    //   value: 'TD',
+    //   child: [
+    //     {
+    //       title: 'Yêu cầu tuyển dụng',
+    //       value: 'YCTD'
+    //     },
+    //   ]
+    // },
+    // {
+    //   fa: 'Đào tạo',
+    //   icon: require('../icons/ic_edu.png'),
+    //   value: 'DT',
+    //   child: [
+    //     {
+    //       title: 'Yêu cầu đào tạo',
+    //       value: 'YCDT'
+    //     },
+    //   ]
+    // },
     // {
     //   fa: 'Hướng dẫn sử dụng',
     //   value: 'HDSD',

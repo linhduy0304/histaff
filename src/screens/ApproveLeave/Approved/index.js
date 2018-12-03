@@ -30,7 +30,7 @@ class Approved extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: this.props.app.typeLeave[0].ID,
+			value: this.props.app.typeLeave.length > 0 ? this.props.app.typeLeave[0].ID : '',
 			employee: '',
 			data: []
 		}

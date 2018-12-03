@@ -6,15 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Picker, 
-  FlatList,
-  Dimensions,
+	Platform,
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	Image,
+	Picker, 
+	FlatList,
+	Dimensions,
 } from 'react-native';
 
 import Nav from '../../components/Nav';
@@ -52,7 +52,7 @@ class QTNL extends Component {
 
 	render() {
 		return (
-		<View style={[css.container, {backgroundColor: '#e7e7e7'}]}>
+		<View style={[css.container,]}>
 			{
                 this.props.profile.loading ?
                     <LoadingFull/>
@@ -62,7 +62,7 @@ class QTNL extends Component {
 			<FlatList 
 				data={this.state.data}
 				ListFooterComponent={this.renderFooter}
-				contentContainerStyle={{ backgroundColor: '#e7e7e7', padding: 15}}
+				contentContainerStyle={{ padding: 15}}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem = {data =>  <ItemQTNL data = {data.item}/>}
 			/>

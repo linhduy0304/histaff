@@ -28,12 +28,14 @@ class CBNV_QTDG extends Component {
 		super(props);
 		this.state = {
 			data: [],
-			empId: this.props.app.employees[0].ID,
+			empId: this.props.app.employees.length > 0 ? this.props.app.employees[0].ID : '',
 		}
 	}
 
   	componentWillMount = () => {
-		this.props.getStaff(this.state.empId, 'judge') //danh gia
+		if(this.props.app.employees.length > 0) {
+			this.props.getStaff(this.state.empId, 'judge') //danh gia
+		}
 	};
 
 	componentWillReceiveProps = (nextProps) => {

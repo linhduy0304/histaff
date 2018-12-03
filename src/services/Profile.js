@@ -28,6 +28,8 @@ export const getTrainInCompany = (id, load, userName) => {
 			return HTTP.get(`${URL.profile}/working-before?employeeId=${id}`)
 		case 'salary':
 			return HTTP.get(`${URL.profile}/salaryallowance?employeeID=${id}&userName=${userName}`)
+		case 'trainHistory':
+			return HTTP.get(`${URL.profile}/historytrain/get/${id}`)
 		default:
 			return;
 	}

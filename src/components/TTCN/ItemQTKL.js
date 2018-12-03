@@ -1,33 +1,36 @@
 
 import React from 'react'
 import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
+	View,
+	Text,
+	Image,
+	TouchableOpacity,
+	StyleSheet,
+	Dimensions,
 } from 'react-native';
-import { family_label, family_value} from '../../config/System'
+import { family_label, family_value, colorBlack} from '../../config/System'
 
 const ItemQTKL = ({
-  data,
+  	data,
   // onPress = item,
 }) => (
-  <View style={css.ctItem}>
-    <Text style={css.txtStatus}>Số quyết định:  <Text style={css.txtValue}>{data.SQD}</Text></Text>
-    <Text style={css.txtStatus}>Ngày hiệu lực:  <Text style={css.txtValue}>{data.NHL}</Text></Text>
-    <Text style={css.txtStatus}>Ngày vi phạm:  <Text style={css.txtValue}>{data.NVP}</Text></Text>
-    <Text style={css.txtStatus}>Cấp kỷ luật:  <Text style={css.txtValue}>{data.CKL}</Text></Text>
-    <Text style={css.txtStatus}>Hình thức kỷ luật:  <Text style={css.txtValue}>{data.HTKL}</Text></Text>
-    <Text style={css.txtStatus}>Tiền phạt:  <Text style={css.txtValue}>{data.TP}</Text></Text>
-  </View>
+	<View style={{padding: 2}}>
+		<View style={css.ctItem}>
+			<Text style={css.txtStatus}>Số quyết định:  <Text style={css.txtValue}>{data.SQD}</Text></Text>
+			<Text style={css.txtStatus}>Ngày hiệu lực:  <Text style={css.txtValue}>{data.NHL}</Text></Text>
+			<Text style={css.txtStatus}>Ngày vi phạm:  <Text style={css.txtValue}>{data.NVP}</Text></Text>
+			<Text style={css.txtStatus}>Cấp kỷ luật:  <Text style={css.txtValue}>{data.CKL}</Text></Text>
+			<Text style={css.txtStatus}>Hình thức kỷ luật:  <Text style={css.txtValue}>{data.HTKL}</Text></Text>
+			<Text style={css.txtStatus}>Tiền phạt:  <Text style={css.txtValue}>{data.TP}</Text></Text>
+		</View>
+	</View>
+	
 )
 
 const css = StyleSheet.create({
   txtValue: {
     fontSize: 14,
-    color: '#1f2a35',
+    color: colorBlack,
     fontFamily: family_value
   },
   txtStatus: {

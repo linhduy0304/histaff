@@ -30,7 +30,7 @@ class ApproveCancel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: this.props.app.typeOt[0].ID,
+			value: this.props.app.typeOt.length > 0 ? this.props.app.typeOt[0].ID : '',
 			employee: '',
 			data: []
 		}

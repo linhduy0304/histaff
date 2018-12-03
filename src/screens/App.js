@@ -22,7 +22,7 @@ class App extends Component {
         new Store().getSession(Const.USER).then(user => {
             console.log(user)
             if(user) {
-                this.props.getListEmployee(1); //user.EMPLOYEE_ID
+                this.props.getListEmployee(user.EMPLOYEE_ID); //user.EMPLOYEE_ID
                 this.props.getDataUser(user)
                 Actions.home({type: 'reset'})
             }else {

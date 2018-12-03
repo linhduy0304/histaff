@@ -40,12 +40,14 @@ class Login extends Component {
             <View style={Css.container}>
                 {
                     this.props.auth.loading ? 
-                        <LoadingFull />
+                        <LoadingFull
+                            text='Đang đăng nhập'
+                        />
                     : null
                 }
                 <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container}>
-                    <View style={{alignItems: 'center'}}>
+                    <View style={{alignItems: 'center', marginBottom: 20}}>
                         <Image style={styles.logo} source={require('../icons/logo.jpg')}/>
                     </View>
                     <Input
@@ -75,7 +77,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 40,
+        paddingTop: 50,
         padding: 20,
     },
     logo: {

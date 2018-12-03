@@ -5,6 +5,7 @@ import { Text,Platform,StatusBar, View, StyleSheet, Image, TouchableOpacity } fr
 import { Actions } from 'react-native-router-flux';
 import { colorPrimary, screen } from '../config/System';
 import StBar from './StBar';
+import AppText from './AppText';
 
 const Nav = ({
     label,
@@ -22,7 +23,7 @@ const Nav = ({
 			: null
 		}
 		<View style={css.ct}>
-			<Text numberOfLines={1} style={css.label}>{label}</Text>
+			<AppText numberOfLines={1} style={{color: '#fff', maxWidth: screen.width*2/3,}}>{label}</AppText>
 			<TouchableOpacity onPress={onPress} style={css.ctBack}>
 				<Image source={require('../icons/ic_back.png')} />
 			</TouchableOpacity>
